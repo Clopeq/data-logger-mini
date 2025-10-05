@@ -62,7 +62,7 @@ int main(void)
         while(1) {
             //ADS1263_GetAll(ChannelList, Value, ChannelNumber);  // Get ADC1 value
             for(i=0; i<ChannelNumber; i++) {
-                printf("IN%d is %ld \n", ChannelList[i], ADS1263_GetChannalValue(ChannelList[i]));
+                printf("IN%d is %ld \n", ChannelList[i], ADC_read(ChannelList[i]));
                 // if((Value[i]>>31) == 1)
                 //     printf("IN%d is -%lf \r\n", ChannelList[i], REF*2 - Value[i]/2147483648.0 * REF);      //7fffffff + 1
                 // else
