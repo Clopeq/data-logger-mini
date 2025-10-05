@@ -9,7 +9,7 @@
 UBYTE ADC_init(ADS1263_DRATE rate);
 UBYTE ADC2_init(ADS1263_ADC2_DRATE rate);
 void ADC_setmode(UBYTE Mode);
-UDOUBLE ADC_read(UBYTE Channel);
+double ADC_read(UBYTE Channel);
 // void ADS1263_GetAll(UBYTE *List, UDOUBLE *Value, int Number);
 // void ADS1263_GetAll_ADC2(UDOUBLE *ADC_Value);
 // UDOUBLE ADS1263_RTD(ADS1263_DELAY delay, ADS1263_GAIN gain, ADS1263_DRATE drate);
