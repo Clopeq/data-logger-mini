@@ -13,9 +13,9 @@ void ADC_setmode(UBYTE Mode) {
 }
 UBYTE ADC_read(UBYTE Channel) {
     UBYTE value = ADS1263_GetChannalValue(Channel);
-    if((value>>31) == 1)
-        value = -1.0 * (REF*2.0 - value/2147483648.0 * REF);      //7fffffff + 1
-    else
-        value = value/2147483647.0 * REF;       //7fffffff
+    // if((value>>31) == 1)
+    //     value = -1.0 * (REF*2.0 - value/2147483648.0 * REF);      //7fffffff + 1
+    // else
+    //     value = value/2147483647.0 * REF;       //7fffffff
     return value;
 }
