@@ -2,6 +2,7 @@
 #include <stdlib.h>     //exit()
 #include <signal.h>     //signal()
 #include "Driver/ADS1263.h"
+#include "Driver/DEV_Config.h"
 
 // ADC1 test part
 #define TEST_ADC1       1
