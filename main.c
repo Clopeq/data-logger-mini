@@ -48,6 +48,10 @@ int main(void)
         exit(0);
     }
     
+    /* Test DAC */
+    ADS1263_DAC(ADS1263_DAC_VLOT_3, Positive_A6, Open);      
+    // ADS1263_DAC(ADS1263_DAC_VLOT_2, Negative_A7, Open);
+    
     printf("TEST_ADC1\r\n");
     
     #define ChannelNumber 5
