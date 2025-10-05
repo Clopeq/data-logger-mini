@@ -11,12 +11,11 @@ UBYTE ADC2_init(ADS1263_ADC2_DRATE rate){
 void ADC_setmode(UBYTE Mode) {
     ADS1263_SetMode(Mode);
 }
-double ADC_read(UBYTE Channel) {
-    uint32_t value = ADS1263_GetChannalValue(Channel);
-    double double_value = 0;
+UBYTE ADC_read(UBYTE Channel) {
+    UBYTE value = ADS1263_GetChannalValue(Channel);
     if((value>>31) == 1)
-        double_value = -1.0 * (REF*2.0 - (double)value/2147483648.0 * REF);      //7fffffff + 1
+        value = -1.0 * (REF*2.0 - value/2147483648.0 * REF);      //7fffffff + 1
     else
-        double_value = (double)value/2147483647.0 * REF;       //7fffffff
-    return double_value;
+        value = value/2147483647.0 * REF;       //7fffffff
+    return value;
 }
