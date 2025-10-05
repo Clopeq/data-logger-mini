@@ -42,15 +42,11 @@ int main(void)
     
     // The faster the rate, the worse the stability
     // and the need to choose a suitable digital filter(REG_MODE1)
-    if(ADS1263_init_ADC1(ADS1263_400SPS) == 1) {
+    if(ADS1263_init_ADC1(ADS1263_38400SPS) == 1) {
         printf("\r\n END \r\n");
         DEV_Module_Exit();
         exit(0);
     }
-    
-    /* Test DAC */
-    ADS1263_DAC(ADS1263_DAC_VLOT_3, Positive_A6, Open);      
-    // ADS1263_DAC(ADS1263_DAC_VLOT_2, Negative_A7, Open);
     
     printf("TEST_ADC1\r\n");
     
