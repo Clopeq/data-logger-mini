@@ -1,4 +1,6 @@
 #include <iostream>
+#include <stdlib.h>     //exit()
+#include <signal.h>     //signal()
 #include "Driver/ADS1263.h"
 
 // ADC1 test part
@@ -15,13 +17,25 @@
 
 using namespace std;
 
+void  Handler(int signo)
+{
+    //System Exit
+    printf("\r\n END \r\n");
+    DEV_Module_Exit();
+    exit(0);
+}
+
 int main(void)
 {
     UDOUBLE ADC[10];
     UWORD i;
     double RES, TEMP;
     
-    printf("ADS1263 Demo \r\n");\
+    // Exception handling:ctrl + c
+    signal(SIGINT, Handler);
+    
+    printf("ADS1263 Demo \r\n");
+    DEV_Module_Init();
 
     // 0 is singleChannel, 1 is diffChannel
     ADS1263_SetMode(0);
@@ -30,6 +44,7 @@ int main(void)
     // and the need to choose a suitable digital filter(REG_MODE1)
     if(ADS1263_init_ADC1(ADS1263_400SPS) == 1) {
         printf("\r\n END \r\n");
+        DEV_Module_Exit();
         exit(0);
     }
     
