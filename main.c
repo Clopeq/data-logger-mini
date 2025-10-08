@@ -1,10 +1,10 @@
 #include <stdlib.h>     //exit()
 #include <signal.h>     //signal()
 #include <time.h>
-#include "ADS1263_wrapper.h"
-#include "stdio.h"
-#include <string.h>
 #include "Pages/live_view.h"
+#include "ADS1263_wrapper.h"
+#include <stdio.h>
+#include <string.h>
 
 // ADC1 test part
 #define TEST_ADC1       1
@@ -28,10 +28,6 @@ void  Handler(int signo)
 
 int main(void)
 {
-    UDOUBLE ADC[10];
-    UWORD i;
-    double RES, TEMP;
-    
     // Exception handling:ctrl + c
     signal(SIGINT, Handler);
     
