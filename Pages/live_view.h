@@ -1,5 +1,5 @@
-#ifndef __LIVE_VIEW_H__
-#define __LIVE_VIEW_H__
+#ifndef LIVE_VIEW_H_
+#define LIVE_VIEW_H_
 
 
 void live_view();
