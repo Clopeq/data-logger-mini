@@ -4,8 +4,8 @@ DIR_Examples = ./
 DIR_BIN      = ./bin
 DIR_PAGES = ./Pages
 
-OBJ_C = $(wildcard ${DIR_DRIVER}/*.c ${DIR_Examples}/*.c ${DIR_PAGES}/*.c)
-OBJ_O = $(patsubst %.c,${DIR_BIN}/%.o,$(notdir ${OBJ_C}))
+OBJ_C = $(wildcard ${DIR_DRIVER}/*.cpp ${DIR_Examples}/*.cpp ${DIR_PAGES}/*.cpp)
+OBJ_O = $(patsubst %.cpp,${DIR_BIN}/%.o,$(notdir ${OBJ_C}))
 RPI_DEV_C = $(wildcard $(DIR_BIN)/dev_hardware_SPI.o $(DIR_BIN)/RPI_sysfs_gpio.o $(DIR_BIN)/DEV_Config.o )
 JETSON_DEV_C = $(wildcard $(DIR_BIN)/sysfs_software_spi.o $(DIR_BIN)/sysfs_gpio.o $(DIR_BIN)/DEV_Config.o )
 
@@ -52,25 +52,25 @@ JETSON_epd:${OBJ_O}
 	$(CC) $(CFLAGS) $(OBJ_O) $(JETSON_DEV_C) -o $(TARGET) $(LIB_JETSONI) $(DEBUG)
 
 
-${DIR_BIN}/%.o:$(DIR_PAGES)/%.c
+${DIR_BIN}/%.o:$(DIR_PAGES)/%.cpp
 	$(CC) $(CFLAGS) -c  $< -o $@ -I $(DIR_Config) -I $(DIR_DRIVER) -I $(DIR_PAGES) $(DEBUG)
 	
-${DIR_BIN}/%.o:$(DIR_Examples)/%.c
+${DIR_BIN}/%.o:$(DIR_Examples)/%.cpp
 	$(CC) $(CFLAGS) -c  $< -o $@ -I $(DIR_Config) -I $(DIR_DRIVER) -I $(DIR_PAGES) $(DEBUG)
     
-${DIR_BIN}/%.o:$(DIR_DRIVER)/%.c
+${DIR_BIN}/%.o:$(DIR_DRIVER)/%.cpp
 	$(CC) $(CFLAGS) -c  $< -o $@ -I $(DIR_Config) $(DEBUG)
 
 
 RPI_DEV:
-	$(CC) $(CFLAGS) $(DEBUG_RPI) -c  $(DIR_Config)/dev_hardware_SPI.c -o $(DIR_BIN)/dev_hardware_SPI.o $(LIB_RPI) $(DEBUG)
-	$(CC) $(CFLAGS) $(DEBUG_RPI) -c  $(DIR_Config)/RPI_sysfs_gpio.c -o $(DIR_BIN)/RPI_sysfs_gpio.o $(LIB_RPI) $(DEBUG)
-	$(CC) $(CFLAGS) $(DEBUG_RPI) -c  $(DIR_Config)/DEV_Config.c -o $(DIR_BIN)/DEV_Config.o $(LIB_RPI) $(DEBUG)
+	$(CC) $(CFLAGS) $(DEBUG_RPI) -c  $(DIR_Config)/dev_hardware_SPI.cpp -o $(DIR_BIN)/dev_hardware_SPI.o $(LIB_RPI) $(DEBUG)
+	$(CC) $(CFLAGS) $(DEBUG_RPI) -c  $(DIR_Config)/RPI_sysfs_gpio.cpp -o $(DIR_BIN)/RPI_sysfs_gpio.o $(LIB_RPI) $(DEBUG)
+	$(CC) $(CFLAGS) $(DEBUG_RPI) -c  $(DIR_Config)/DEV_Config.cpp -o $(DIR_BIN)/DEV_Config.o $(LIB_RPI) $(DEBUG)
 	
 JETSON_DEV:
-	$(CC) $(CFLAGS) $(DEBUG_JETSONI) -c  $(DIR_Config)/sysfs_software_spi.c -o $(DIR_BIN)/sysfs_software_spi.o $(LIB_JETSONI) $(DEBUG)
-	$(CC) $(CFLAGS) $(DEBUG_JETSONI) -c  $(DIR_Config)/sysfs_gpio.c -o $(DIR_BIN)/sysfs_gpio.o $(LIB_JETSONI) $(DEBUG)
-	$(CC) $(CFLAGS) $(DEBUG_JETSONI) -c  $(DIR_Config)/DEV_Config.c -o $(DIR_BIN)/DEV_Config.o $(LIB_JETSONI)  $(DEBUG)
+	$(CC) $(CFLAGS) $(DEBUG_JETSONI) -c  $(DIR_Config)/sysfs_software_spi.cpp -o $(DIR_BIN)/sysfs_software_spi.o $(LIB_JETSONI) $(DEBUG)
+	$(CC) $(CFLAGS) $(DEBUG_JETSONI) -c  $(DIR_Config)/sysfs_gpio.cpp -o $(DIR_BIN)/sysfs_gpio.o $(LIB_JETSONI) $(DEBUG)
+	$(CC) $(CFLAGS) $(DEBUG_JETSONI) -c  $(DIR_Config)/DEV_Config.cpp -o $(DIR_BIN)/DEV_Config.o $(LIB_JETSONI)  $(DEBUG)
 
 clean :
 	rm $(DIR_BIN)/*.* 
