@@ -58,15 +58,15 @@ int main(void)
     printf("Post tare: %lf\n", LC1.read());
 
     int a;
-    cout << "Place a load on a loadcell" << endl;
-    cin >> a;
+    printf("Place a load on a loadcell\n");
+    scanf("%d", &a);
 
-    cout << "pre calibrate: " << LC1.read() << endl;
+    printf("pre calibrate: %lf\n", LC1.read());
     double arr[2];
     LC1.calibrate(100, arr);
-    cout << "post calibrate: " << LC1.read() << endl;
+    printf("post calibrate: %lf\n", LC1.read());
 
-    cin >> a;
+    scanf("%d", &a);
     
 
     while(true) {
