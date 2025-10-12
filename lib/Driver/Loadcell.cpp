@@ -1,9 +1,9 @@
 
 #include "Loadcell.h"
 
-int tare() {
+int tare(int channel) {
 
-    float b = ADC_read()
+    float b = ADC_read(channel);
 
     return b;
 }

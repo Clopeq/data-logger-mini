@@ -38,7 +38,7 @@
 #include <cstdio>
 
 #if DEBUG
-	#define Debug(__info,...) cout << "Debug: " << __info,##__VA_ARGS__
+	#define Debug(__info,...) printf("Debug: " __info,##__VA_ARGS__)
 #else
 	#define Debug(__info,...)  
 #endif
