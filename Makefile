@@ -2,7 +2,7 @@ DIR_Config   = ./lib/Config
 DIR_DRIVER      = ./lib/Driver
 DIR_Examples = ./
 DIR_BIN      = ./bin
-DIR_PAGES = ./lib/Pages
+DIR_PAGES = ./Pages
 
 OBJ_C = $(wildcard ${DIR_DRIVER}/*.c ${DIR_Examples}/*.c ${DIR_PAGES}/*.c)
 OBJ_O = $(patsubst %.c,${DIR_BIN}/%.o,$(notdir ${OBJ_C}))
