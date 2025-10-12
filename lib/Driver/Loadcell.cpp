@@ -2,7 +2,7 @@
 #include "Loadcell.h"
 
 
-Loadcell::Loadcell(int set_channel) {
+Loadcell::Loadcell(char set_channel) {
     channel = set_channel;
     a = 1;
     b = 0;
