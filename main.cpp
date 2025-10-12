@@ -6,6 +6,9 @@
 #include <stdio.h>
 #include <string.h>
 #include "Loadcell.h"
+#include <iostream>
+
+using namespace std;
 
 // ADC1 test part
 #define TEST_ADC1       1
@@ -50,6 +53,21 @@ int main(void)
     
     short int ch = 0;
     Loadcell LC1(ch);
+    printf("Pre tare: %lf\n", LC1.read());
+    LC1.tare();
+    printf("Post tare: %lf\n", LC1.read());
+
+    int a;
+    cout << "Place a load on a loadcell" << endl;
+    cin >> a;
+
+    cout << "pre calibrate: " << LC1.read() << endl;
+    double arr[2];
+    LC1.calibrate(100, arr);
+    cout << "post calibrate: " << LC1.read() << endl;
+
+    cin >> a;
+    
 
     while(true) {
         printf("%lf \n", LC1.read());
