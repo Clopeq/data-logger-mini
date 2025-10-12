@@ -5,6 +5,7 @@
 #include "ADS1263_wrapper.h"
 #include <stdio.h>
 #include <string.h>
+#include "Loadcell.h"
 
 // ADC1 test part
 #define TEST_ADC1       1
@@ -44,8 +45,15 @@ int main(void)
         DEV_Module_Exit();
         exit(0);
     }
+
+    // ------------------ END INIT --------------
     
-    live_view();    
+    Loadcell LC1(0);
+
+    while(true) {
+        printf("%d \n", LC1.read());
+        printf("\33[1A");
+    }  
 
     return 0;
 }
