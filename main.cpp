@@ -52,7 +52,7 @@ int main(void)
     Loadcell LC1(ch);
 
     while(true) {
-        printf("%lf \n", LC1.read());
+        printf("%lf \n", ADC_read(0));
         printf("\33[1A");
     }  
 
