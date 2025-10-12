@@ -6,7 +6,7 @@
 
 class Loadcell {
     public:
-        Loadcell(uint8_t ch);
+        Loadcell(short int ch);
         void set_a(double a_new);
         void set_b(double b_new);
         double tare();
@@ -14,7 +14,7 @@ class Loadcell {
         double read();
     
     private:
-        uint8_t channel;
+        short int channel;
         double a;
         double b;
 
