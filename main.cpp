@@ -48,7 +48,8 @@ int main(void)
 
     // ------------------ END INIT --------------
     
-    Loadcell LC1(0);
+    short int ch = 0;
+    Loadcell LC1(ch);
 
     while(true) {
         printf("%d \n", LC1.read());
