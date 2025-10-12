@@ -30,6 +30,8 @@
 #include "DEV_Config.h"
 #include <fcntl.h>
 
+using namespace std;
+
 /**
  * GPIO
 **/
@@ -192,7 +194,7 @@ static int DEV_Equipment_Testing(void)
 	int fd;
 	char value_str[20];
 	fd = open("/etc/issue", O_RDONLY);
-    printf("Current environment: ");
+    cout << "Current environment: ";
 	while(1) {
 		if (fd < 0) {
 			Debug( "Read failed Pin\n");
@@ -204,7 +206,7 @@ static int DEV_Equipment_Testing(void)
 				return -1;
 			}
 			if(value_str[i] ==32) {
-				printf("\r\n");
+				cout << "\r\n";
 				break;
 			}
 			printf("%c",value_str[i]);
