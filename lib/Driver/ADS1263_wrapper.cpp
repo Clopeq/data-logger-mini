@@ -11,7 +11,7 @@ UBYTE ADC2_init(ADS1263_ADC2_DRATE rate){
 void ADC_setmode(UBYTE Mode) {
     ADS1263_SetMode(Mode);
 }
-double ADC_read(char Channel) {
+double ADC_read(uint8_t Channel) {
     UDOUBLE value = ADS1263_GetChannalValue((UBYTE)Channel);
     if((value>>31) == 1)
          value = -1.0 * (REF*2.0 - value/2147483648.0 * REF);      //7fffffff + 1
