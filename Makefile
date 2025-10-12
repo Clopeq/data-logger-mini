@@ -54,6 +54,8 @@ JETSON_epd:${OBJ_O}
 # ${DIR_BIN}/%.o:$(DIR_Examples)/%.c
 # 	$(CC) $(CFLAGS) -c  $< -o $@ -I $(DIR_Config) -I $(DIR_DRIVER) $(DEBUG)
 
+${DIR_BIN}/%.o:$(DIR_PAGES)/%.c
+	$(CC) $(CFLAGS) -c  $< -o $@ -I $(DIR_Config) -I $(DIR_DRIVER) -I $(DIR_PAGES) $(DEBUG)
 	
 ${DIR_BIN}/%.o:$(DIR_Examples)/%.c
 	$(CC) $(CFLAGS) -c  $< -o $@ -I $(DIR_Config) -I $(DIR_DRIVER) -I $(DIR_PAGES) $(DEBUG)
