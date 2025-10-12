@@ -1,7 +1,7 @@
 
-#include <stdio.h>
 #include "live_view.h"
-#include "ADS1263_wrapper.h"
+
+
 
 void live_view() {
     printf("TEST_ADC1\r\n");

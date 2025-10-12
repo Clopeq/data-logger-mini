@@ -1,7 +1,7 @@
 #include <stdlib.h>     //exit()
 #include <signal.h>     //signal()
 #include <time.h>
-#include "Pages/live_view.h"
+#include "./Pages/live_view.h"
 #include "ADS1263_wrapper.h"
 #include <stdio.h>
 #include <string.h>
