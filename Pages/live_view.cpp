@@ -13,7 +13,7 @@ void live_view() {
     while(1) {
 
         for(int i=0; i<ChannelNumber; i++) {
-            printf("IN%d is %lf \n", ChannelList[i], ADC_read(ChannelList[i]));
+            printf("IN%d is %lf \n", ChannelList[i], ADC_read((int)ChannelList[i]));
         }
         for(int i=0; i<ChannelNumber; i++) {
             printf("\33[1A");   // Move the cursor up
