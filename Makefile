@@ -1,5 +1,5 @@
 DIR_Config   = ./lib/Config
-DIR_DRIVER      = ./lib/Driver
+DIR_DRIVER      = ./lib
 DIR_Examples = ./
 DIR_BIN      = ./bin
 DIR_PAGES = ./Pages
