@@ -50,28 +50,9 @@ int main(void)
 
     // ------------------ END INIT --------------
     
-    short int ch = 0;
-    Loadcell LC1(ch);
-    printf("Pre tare: %lf\n", LC1.read());
-    LC1.tare();
-    printf("Post tare: %lf\n", LC1.read());
-
-    int a;
-    printf("Place a load on a loadcell\n");
-    scanf("%d", &a);
-
-    printf("pre calibrate: %lf\n", LC1.read());
-    double arr[2];
-    LC1.calibrate(100, arr);
-    printf("post calibrate: %lf\n", LC1.read());
-
-    scanf("%d", &a);
-    
-
     while(true) {
-        printf("%lf \n", LC1.read());
-        printf("\33[1A");
-    }  
+        
+    }
 
     return 0;
 }

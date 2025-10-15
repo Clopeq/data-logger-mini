@@ -2,7 +2,11 @@
 #define LOADCELL_H_
 
 #include "ADS1263_wrapper.h"
+#include "../nlohmann/json.hpp"
 
+/* TODO
+    store and load data to a file outside somwhere where it will not be updated by git pull
+*/
 
 class Loadcell {
     public:
@@ -17,7 +21,6 @@ class Loadcell {
         short int channel;
         double a;
         double b;
-
 };
 
 #endif
