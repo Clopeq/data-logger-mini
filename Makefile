@@ -1,8 +1,9 @@
 DIR_Config   = ./lib/Config
-DIR_DRIVER      = ./lib
+DIR_DRIVER      = ./lib/Driver
 DIR_Examples = ./
 DIR_BIN      = ./bin
 DIR_PAGES = ./Pages
+DIR_JSON = ./lib/nlohmann
 
 OBJ_C = $(wildcard ${DIR_DRIVER}/*.cpp ${DIR_Examples}/*.cpp ${DIR_PAGES}/*.cpp)
 OBJ_O = $(patsubst %.cpp,${DIR_BIN}/%.o,$(notdir ${OBJ_C}))
@@ -53,10 +54,13 @@ JETSON_epd:${OBJ_O}
 
 
 ${DIR_BIN}/%.o:$(DIR_PAGES)/%.cpp
-	$(CC) $(CFLAGS) -c  $< -o $@ -I $(DIR_Config) -I $(DIR_DRIVER) -I $(DIR_PAGES) $(DEBUG)
+	$(CC) $(CFLAGS) -c  $< -o $@ -I $(DIR_Config) -I $(DIR_DRIVER) -I $(DIR_PAGES) -I $(DIR_JSON) $(DEBUG)
+
+${DIR_BIN}/%.o:$(DIR_JSON)/%.hpp
+	$(CC) $(CFLAGS) -c  $< -o $@ -I $(DIR_Config) -I $(DIR_DRIVER) -I $(DIR_PAGES) -I $(DIR_JSON) $(DEBUG)
 	
 ${DIR_BIN}/%.o:$(DIR_Examples)/%.cpp
-	$(CC) $(CFLAGS) -c  $< -o $@ -I $(DIR_Config) -I $(DIR_DRIVER) -I $(DIR_PAGES) $(DEBUG)
+	$(CC) $(CFLAGS) -c  $< -o $@ -I $(DIR_Config) -I $(DIR_DRIVER) -I $(DIR_PAGES) -I $(DIR_JSON) $(DEBUG)
     
 ${DIR_BIN}/%.o:$(DIR_DRIVER)/%.cpp
 	$(CC) $(CFLAGS) -c  $< -o $@ -I $(DIR_Config) $(DEBUG)
