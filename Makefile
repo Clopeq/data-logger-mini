@@ -59,8 +59,8 @@ ${DIR_BIN}/%.o:$(DIR_PAGES)/%.cpp
 ${DIR_BIN}/%.o:$(DIR_JSON)/%.hpp
 	$(CC) $(CFLAGS) -c  $< -o $@ -I $(DIR_Config) -I $(DIR_DRIVER) -I $(DIR_PAGES) -I $(DIR_JSON) $(DEBUG)
 	
-${DIR_BIN}/%.o:$(DIR_Examples)/%.cpp
-	$(CC) $(CFLAGS) -c  $< -o $@ -I $(DIR_Config) -I $(DIR_DRIVER) -I $(DIR_PAGES) -I $(DIR_JSON) $(DEBUG)
+# ${DIR_BIN}/%.o:$(DIR_Examples)/%.cpp
+# 	$(CC) $(CFLAGS) -c  $< -o $@ -I $(DIR_Config) -I $(DIR_DRIVER) -I $(DIR_PAGES) -I $(DIR_JSON) $(DEBUG)
     
 ${DIR_BIN}/%.o:$(DIR_DRIVER)/%.cpp
 	$(CC) $(CFLAGS) -c  $< -o $@ -I $(DIR_Config) $(DEBUG)

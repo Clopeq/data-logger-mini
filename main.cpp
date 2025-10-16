@@ -1,11 +1,10 @@
 #include <stdlib.h>     //exit()
 #include <signal.h>     //signal()
 #include <time.h>
-#include "./Pages/live_view.h"
-#include "ADS1263_wrapper.h"
+#include <ADC>
 #include <stdio.h>
 #include <string.h>
-#include "Loadcell.h"
+//#include "Loadcell.h"
 
 using namespace std;
 
@@ -51,7 +50,7 @@ int main(void)
     // ------------------ END INIT --------------
     
     while(true) {
-        
+        printf("CH-: %lf\n", ADC_read(0));
     }
 
     return 0;
