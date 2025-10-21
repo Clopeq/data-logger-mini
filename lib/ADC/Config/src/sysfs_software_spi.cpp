@@ -70,6 +70,14 @@ void SYSFS_software_spi_end(void)
 
 void SYSFS_software_spi_setBitOrder(uint8_t order)
 {
+    switch(order & 1) {
+        case 0:
+            software_spi.Order = SOFTWARE_SPI_LSBFIRST;
+            break;
+        case 1:
+            software_spi.Order = SOFTWARE_SPI_MSBFIRST;
+            break;
+    }
     software_spi.Order = order & 1;
 }
 
@@ -124,28 +132,28 @@ void SYSFS_software_spi_setClockDivider(uint8_t div)
     }
     switch (div) {
     case SOFTWARE_SPI_CLOCK_DIV2:
-        software_spi.Delay = 2;
+        software_spi.Delay = SOFTWARE_SPI_CLOCK_DIV2;
         break;
     case SOFTWARE_SPI_CLOCK_DIV4:
-        software_spi.Delay = 4;
+        software_spi.Delay = SOFTWARE_SPI_CLOCK_DIV4;
         break;
     case SOFTWARE_SPI_CLOCK_DIV8:
-        software_spi.Delay = 8;
+        software_spi.Delay = SOFTWARE_SPI_CLOCK_DIV8;
         break;
     case SOFTWARE_SPI_CLOCK_DIV16:
-        software_spi.Delay = 16;
+        software_spi.Delay = SOFTWARE_SPI_CLOCK_DIV16;
         break;
     case SOFTWARE_SPI_CLOCK_DIV32:
-        software_spi.Delay = 32;
+        software_spi.Delay = SOFTWARE_SPI_CLOCK_DIV32;
         break;
     case SOFTWARE_SPI_CLOCK_DIV64:
-        software_spi.Delay = 64;
+        software_spi.Delay = SOFTWARE_SPI_CLOCK_DIV64;
         break;
     case SOFTWARE_SPI_CLOCK_DIV128:
-        software_spi.Delay = 128;
+        software_spi.Delay = SOFTWARE_SPI_CLOCK_DIV128;
         break;
     default:
-        software_spi.Delay = 128;
+        software_spi.Delay = SOFTWARE_SPI_CLOCK_DIV128;
         break;
     }
 }
@@ -200,4 +208,5 @@ uint8_t SYSFS_software_spi_transfer(uint8_t value)
 		}
 		return Read_data;
 	}
+    return -1;
 }
