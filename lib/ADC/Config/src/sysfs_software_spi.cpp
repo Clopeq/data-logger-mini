@@ -79,7 +79,22 @@ void SYSFS_software_spi_setDataMode(uint8_t mode)
         SYSFS_SOFTWARE_SPI_Debug("MODE must be 0-3\r\n");
         return;
     }
-    software_spi.Mode = mode;
+
+    switch(mode) {
+        case 0:
+            software_spi.Mode = SOFTWARE_SPI_Mode0;
+            break;
+        case 1:
+            software_spi.Mode = SOFTWARE_SPI_Mode1;
+            break;
+        case 2:
+            software_spi.Mode = SOFTWARE_SPI_Mode2;
+            break;
+        case 3:
+            software_spi.Mode = SOFTWARE_SPI_Mode3;
+            break;
+    }
+    // software_spi.Mode = mode;
 
     switch (software_spi.Mode) {
     case SOFTWARE_SPI_Mode0:
