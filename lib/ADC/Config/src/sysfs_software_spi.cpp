@@ -78,7 +78,6 @@ void SYSFS_software_spi_setBitOrder(uint8_t order)
             software_spi.Order = SOFTWARE_SPI_MSBFIRST;
             break;
     }
-    software_spi.Order = order & 1;
 }
 
 void SYSFS_software_spi_setDataMode(uint8_t mode)
