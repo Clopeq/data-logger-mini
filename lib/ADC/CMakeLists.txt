@@ -1,9 +1,16 @@
- cmake_minimum_required(VERSION 3.25)
 
- project(ADC)
+set(LIB_NAME ADC)
 
- include_directories(Config/lib)
- include_directories(lib)
- include_directories(../json)
+# Create library target
+add_library(${LIB_NAME})
 
- add_library(${PROJECT_NAME} Config/src/DEV_Config.cpp Config/src/dev_hardware_SPI.cpp Config/src/RPI_sysfs_gpio.cpp Config/src/sysfs_gpio.cpp Config/src/sysfs_software_spi.cpp src/ADS1263_wrapper.cpp src/ADS1263.cpp)
+# Collct sources
+file(GLOB SRC_FILES src/*.cpp Config/src/*.cpp)
+
+# Add them to the target
+target_sources(${LIB_NAME} PRIVATE ${SRC_FILES})
+
+# Add include directory for this library
+target_include_directories(${LIB_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_CURRENT_SOURCE_DIR}/Config/lib)
+
+target_link_libraries(${LIB_NAME} PUBLIC json)

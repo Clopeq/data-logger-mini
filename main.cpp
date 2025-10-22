@@ -1,7 +1,7 @@
 #include <stdlib.h>     //exit()
 #include <signal.h>     //signal()
 #include <time.h>
-#include <ADC>
+#include <ADC.h>
 #include <stdio.h>
 #include <string.h>
 //#include "Loadcell.h"

@@ -1,8 +1,8 @@
 #ifndef LOADCELL_H_
 #define LOADCELL_H_
 
-#include "ADS1263_wrapper.h"
-#include "../nlohmann/json.hpp"
+#include <ADC.h>
+#include <json.h>
 
 /* TODO
     store and load data to a file outside somwhere where it will not be updated by git pull
