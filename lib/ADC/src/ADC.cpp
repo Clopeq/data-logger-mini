@@ -1,5 +1,5 @@
 
-#include "ADS1263_wrapper.h"
+#include "ADC.h"
 
 UBYTE ADC_init(ADS1263_DRATE rate) {
     return ADS1263_init_ADC1(rate);
