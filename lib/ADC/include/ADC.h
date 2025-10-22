@@ -1,20 +1,13 @@
-#ifndef ADS1263_WRAPPER_H_
-#define ADSA1263_WRAAPPER_H_
+#pragma once
 
-#include "ADS1263.h"
+#include <cstdint>
 
-#define REF 5.08
-#define RPI
-#define USE_BCM2835_LIB
-
-UBYTE ADC_init(ADS1263_DRATE rate);
-UBYTE ADC2_init(ADS1263_ADC2_DRATE rate);
-void ADC_setmode(UBYTE Mode);
-UDOUBLE ADC_read(short int Channel);
-// void ADS1263_GetAll(UBYTE *List, UDOUBLE *Value, int Number);
-// void ADS1263_GetAll_ADC2(UDOUBLE *ADC_Value);
-// UDOUBLE ADS1263_RTD(ADS1263_DELAY delay, ADS1263_GAIN gain, ADS1263_DRATE drate);
-// void ADS1263_DAC(ADS1263_DAC_VOLT volt, UBYTE isPositive, UBYTE isClose);
-
-
-#endif
+class ADC {
+public:
+    ADC();                     // Constructor: initialize SPI
+    ~ADC();                    // Destructor: close SPI
+    uint8_t read_register(uint8_t reg_addr); // Read single register
+private:
+    int spi_fd;                // File descriptor for /dev/spidev0.0
+    void spi_transfer(uint8_t* tx, uint8_t* rx, size_t len);
+};

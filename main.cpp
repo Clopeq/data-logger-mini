@@ -21,41 +21,52 @@ using namespace std;
 //#define REF         5.08        //Modify according to actual voltage
                                 //external AVDD and AVSS(Default), or internal 2.5V
 
-void  Handler(int signo)
-{
-    //System Exit
-    printf("\r\n END \r\n");
-    DEV_Module_Exit();
-    exit(0);
-}
-
-int main(void)
-{
-    // Exception handling:ctrl + c
-    signal(SIGINT, Handler);
-    
-    printf("ADS1263 Demo \r\n");
-    DEV_Module_Init();
-    cout << "Init success!" << endl;
-
-
-    // 0 is singleChannel, 1 is diffChannel
-    ADS1263_SetMode(0);
-    cout << "Set mode 0" << endl;
-    
-    // The faster the rate, the worse the stability
-    // and the need to choose a suitable digital filter(REG_MODE1)
-    if(ADS1263_init_ADC1(ADS1263_38400SPS) == 1) {
-        printf("\r\n END \r\n");
-        DEV_Module_Exit();
-        exit(0);
+int main() {
+    try {
+        ADC adc;
+        uint8_t val = adc.read_register(0x3E);
+        std::cout << "Register 0x3E = 0x" << std::hex << int(val) << std::endl;
+    } catch(const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
     }
-
-    // ------------------ END INIT --------------
-    
-    while(true) {
-        printf("CH-: %lf\n", ADC_read(0));
-    }
-
     return 0;
 }
+
+// void  Handler(int signo)
+// {
+//     //System Exit
+//     printf("\r\n END \r\n");
+//     DEV_Module_Exit();
+//     exit(0);
+// }
+
+// int main(void)
+// {
+//     // Exception handling:ctrl + c
+//     signal(SIGINT, Handler);
+    
+//     printf("ADS1263 Demo \r\n");
+//     DEV_Module_Init();
+//     cout << "Init success!" << endl;
+
+
+//     // 0 is singleChannel, 1 is diffChannel
+//     ADS1263_SetMode(0);
+//     cout << "Set mode 0" << endl;
+    
+//     // The faster the rate, the worse the stability
+//     // and the need to choose a suitable digital filter(REG_MODE1)
+//     if(ADS1263_init_ADC1(ADS1263_38400SPS) == 1) {
+//         printf("\r\n END \r\n");
+//         DEV_Module_Exit();
+//         exit(0);
+//     }
+
+//     // ------------------ END INIT --------------
+    
+//     while(true) {
+//         printf("CH-: %lf\n", ADC_read(0));
+//     }
+
+//     return 0;
+// }
