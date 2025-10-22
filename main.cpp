@@ -22,13 +22,9 @@ using namespace std;
                                 //external AVDD and AVSS(Default), or internal 2.5V
 
 int main() {
-    try {
-        ADC adc;
-        uint8_t val = adc.read_register(0x3E);
-        std::cout << "Register 0x3E = 0x" << std::hex << int(val) << std::endl;
-    } catch(const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
-    }
+    ADC_init();
+    cout << "Register 0x3E = 0x" << (int)ADC_read(0x3E); << endl;
+    ADC_close();
     return 0;
 }
 
