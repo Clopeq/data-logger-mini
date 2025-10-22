@@ -6,6 +6,7 @@
 #include <linux/spi/spidev.h>
 #include <cstring>
 #include <stdexcept>
+#include <cstddef>
 
 ADC::ADC() {
     const char* device = "/dev/spidev0.0";
