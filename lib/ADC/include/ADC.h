@@ -5,7 +5,7 @@
 
 #define REF 5.08
 #define RPI
-#define USE_WIRINGPI_LIB
+#define USE_BCM2835_LIB
 
 UBYTE ADC_init(ADS1263_DRATE rate);
 UBYTE ADC2_init(ADS1263_ADC2_DRATE rate);
