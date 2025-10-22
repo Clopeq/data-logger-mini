@@ -84,7 +84,7 @@ Info:
     Return the read data
 ******************************************************************************/
 
-#include <iostram>
+#include <iostream>
 
 using namespace std;
 
