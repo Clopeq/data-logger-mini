@@ -83,6 +83,11 @@ parameter:
 Info:
     Return the read data
 ******************************************************************************/
+
+#include <iostram>
+
+using namespace std;
+
 static UBYTE ADS1263_Read_data(UBYTE Reg)
 {
     UBYTE temp = 0;
@@ -91,6 +96,7 @@ static UBYTE ADS1263_Read_data(UBYTE Reg)
     DEV_SPI_WriteByte(0x00);
     // DEV_Delay_ms(1);
     temp = DEV_SPI_ReadByte();
+    cout << "Read byte: " << temp << endl;
     DEV_Digital_Write(DEV_CS_PIN, 1);
     return temp;
 }
