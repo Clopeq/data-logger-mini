@@ -4,6 +4,7 @@
 #include <ADC.h>
 #include <stdio.h>
 #include <string.h>
+#include <iostream>
 //#include "Loadcell.h"
 
 using namespace std;
@@ -35,9 +36,12 @@ int main(void)
     
     printf("ADS1263 Demo \r\n");
     DEV_Module_Init();
+    cout << "Init success!" << endl;
+
 
     // 0 is singleChannel, 1 is diffChannel
     ADS1263_SetMode(0);
+    cout << "Set mode 0" << endl;
     
     // The faster the rate, the worse the stability
     // and the need to choose a suitable digital filter(REG_MODE1)
