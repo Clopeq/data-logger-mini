@@ -28,6 +28,7 @@
 #
 ******************************************************************************/
 #include "ADS1263.h"
+#include <iostream>
 
 UBYTE ScanMode = 0;
 
@@ -242,7 +243,12 @@ Info:
 UBYTE ADS1263_init_ADC1(ADS1263_DRATE rate)
 {
     ADS1263_reset();
-    if(ADS1263_ReadChipID() == 1) {
+    UBYTE ID = ADS1263_ReadChipID();
+
+    std::cout << "ID: " << ID << std::endl;
+
+
+    if(ID == 1) {
         printf("ID Read success \r\n");
     }
     else {
