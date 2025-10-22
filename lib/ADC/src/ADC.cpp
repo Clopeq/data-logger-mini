@@ -27,7 +27,7 @@ ADC::~ADC() {
         close(spi_fd);
 }
 
-void ADC::spi_transfer(uint8_t* tx, uint8_t* rx, size_t len) {
+void ADC::spi_transfer(uint8_t* tx, uint8_t* rx, std::size_t len) {
     struct spi_ioc_transfer tr{};
     tr.tx_buf = (unsigned long)tx;
     tr.rx_buf = (unsigned long)rx;

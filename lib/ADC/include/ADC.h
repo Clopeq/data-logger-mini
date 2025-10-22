@@ -1,13 +1,16 @@
 #pragma once
 
 #include <cstdint>
+#include <cstddef>   // size_t is std::size_t
 
 class ADC {
 public:
-    ADC();                     // Constructor: initialize SPI
-    ~ADC();                    // Destructor: close SPI
-    uint8_t read_register(uint8_t reg_addr); // Read single register
+    ADC();                     
+    ~ADC();                    
+
+    uint8_t read_register(uint8_t reg_addr);
+
 private:
-    int spi_fd;                // File descriptor for /dev/spidev0.0
-    void spi_transfer(uint8_t* tx, uint8_t* rx, size_t len);
+    int spi_fd;                
+    void spi_transfer(uint8_t* tx, uint8_t* rx, std::size_t len); // use std::size_t
 };
