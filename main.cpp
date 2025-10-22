@@ -23,7 +23,7 @@ using namespace std;
 
 int main() {
     ADC_init();
-    cout << "Register 0x3E = 0x" << (int)ADC_read(0x3E); << endl;
+    cout << "Register 0x3E = 0x" << (int)ADC_read(0x3E) << endl;
     ADC_close();
     return 0;
 }
