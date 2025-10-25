@@ -12,7 +12,8 @@
 #  else
 // wiringPi header not available for IntelliSense/host build — provide minimal stubs
 // so the editor doesn't flag missing include while the code still compiles on Raspberry Pi.
-inline int wiringPiSetup(void) { return -1; }
+inline int wiringPiSPISetup(int channel, int speed) { return -1; }
+inline int wiringPiSPIClose(int channel) { return -1; }
 #  endif
 #else
 #  include <wiringPi.h>
@@ -34,9 +35,26 @@ using namespace std;
 //#define REF         5.08        //Modify according to actual voltage
                                 //external AVDD and AVSS(Default), or internal 2.5V
 
+
+
 int main() {
     
     cout << "Hello, World!" << endl;
+
+    const int spiChannel = 0;
+    const int spiSpeedInit = 250*1000;
+    int hSPI;
+
+    if ((hSPI = wiringPiSPISetup(spiChannel, spiSpeedInit)) < 0) {
+        // error
+        cout << "Could not initialize SPI communication" << endl;
+        return 0;
+    }
+
+    cout << "SPI communication established successfully" << endl;
+
+
+    wiringPiSPIClose(spiChannel);
 
 
     return 0;
