@@ -9,11 +9,7 @@
 #include <unistd.h>
 
 
-enum WPIPinType {
-    WPI_PIN_BCM,
-    WPI_PIN_WPI,
-    WPI_PIN_PHYS
-};
+
 
 #if defined(__has_include)
     #if __has_include(<wiringPi.h>)
@@ -22,6 +18,13 @@ enum WPIPinType {
     #else
         // wiringPi header not available for IntelliSense/host build — provide minimal stubs
         // so the editor doesn't flag missing include while the code still compiles on Raspberry Pi.
+
+        enum WPIPinType {
+            WPI_PIN_BCM,
+            WPI_PIN_WPI,
+            WPI_PIN_PHYS
+        };
+
         inline int wiringPiSPISetup(int channel, int speed) { return -1; }
         inline int wiringPiSPIClose(int channel) { return -1; }
         inline int wiringPiSPIClose(int channel) { return -1; }
