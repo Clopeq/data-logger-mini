@@ -188,6 +188,8 @@ int main() {
 
     setupGPIO();
 
+    wiringPiSetupPinType(WPI_PIN_BCM);
+
     ADC_init(0);
 
     wiringPiSPIClose(SPI_CHANNEL);
