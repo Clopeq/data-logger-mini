@@ -27,7 +27,7 @@ int main() {
     mode2 = ADC.read_register(REG_MODE2);
 
     cout << endl;
-    cout << "After change MODE2: " << bitset<4>(mode2<<4) << endl;
+    cout << "After change MODE2: " << bitset<4>(mode2) << endl;
 
     return 0;
 }
