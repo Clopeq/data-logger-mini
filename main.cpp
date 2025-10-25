@@ -64,18 +64,18 @@ int main() {
 
     sleep(1);
 
-    unsigned char spiData[4];
+    unsigned char spiData[20];
     int returnvalue;
 
     spiData[0] = 0b00100000;
-    spiData[1] = 0b0000010;
-    for(int i=2; i<4; i++) {
+    spiData[1] = 18;
+    for(int i=2; i<20; i++) {
         spiData[i] = 0;
     }
 
-    returnvalue = wiringPiSPIDataRW(spiChannel, spiData, 4);
+    returnvalue = wiringPiSPIDataRW(spiChannel, spiData, 20);
 
-    for(int i=0; i<4; i++) {
+    for(int i=0; i<20; i++) {
         cout << bitset<8>(spiData[1]) << endl;
     }
 
