@@ -54,6 +54,10 @@ void ADS1263::set_data_rate(ADC_DRATE drate) {
     write_register(REG_MODE2, (unsigned char)drate);
 }
 
+void ADS1263::set_gain(ADC_GAIN gain) {
+    write_register(REG_MODE2, ((unsigned char)gain)<<4);
+}
+
 unsigned char ADS1263::read_register(ADC_REG reg) {
     unsigned char buf = 0;
     unsigned char command = (unsigned char)CMD_RREG | (unsigned char)reg;
