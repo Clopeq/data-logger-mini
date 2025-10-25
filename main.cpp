@@ -21,7 +21,7 @@ int main() {
     cout << "Initial MODE2: " << bitset<8>(mode2) << endl;
 
     
-    ADC.set_data_rate(SPS_2d5);
+    ADC.set_data_rate(SPS_38400);
 
     
     mode2 = ADC.read_register(REG_MODE2);
