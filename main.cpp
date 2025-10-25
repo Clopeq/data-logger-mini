@@ -6,6 +6,7 @@
 #include <string.h>
 #include <iostream>
 #include <bitset>
+#include <unistd.h>
 
 #if defined(__has_include)
     #if __has_include(<wiringPi.h>)
@@ -60,6 +61,8 @@ int main() {
     }
 
     cout << "SPI communication established successfully" << endl;
+
+    sleep(1);
 
     unsigned char spiData[10];
     int returnvalue;
