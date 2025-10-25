@@ -6,18 +6,20 @@
 #include <string.h>
 #include <iostream>
 
-#if defined(__has_include)
-#  if __has_include(<wiringPi.h>)
-#    include <wiringPi.h>
-#  else
-// wiringPi header not available for IntelliSense/host build — provide minimal stubs
-// so the editor doesn't flag missing include while the code still compiles on Raspberry Pi.
-inline int wiringPiSPISetup(int channel, int speed) { return -1; }
-inline int wiringPiSPIClose(int channel) { return -1; }
-#  endif
-#else
-#  include <wiringPi.h>
-#endif
+// #if defined(__has_include)
+// #  if __has_include(<wiringPi.h>)
+// #    include <wiringPi.h>
+// #  else
+// // wiringPi header not available for IntelliSense/host build — provide minimal stubs
+// // so the editor doesn't flag missing include while the code still compiles on Raspberry Pi.
+// inline int wiringPiSPISetup(int channel, int speed) { return -1; }
+// inline int wiringPiSPIClose(int channel) { return -1; }
+// #  endif
+// #else
+// #  include <wiringPi.h>
+// #endif
+
+#include <wiringPi.h>
 
 //#include "Loadcell.h"
 
@@ -55,7 +57,6 @@ int main() {
 
 
     wiringPiSPIClose(spiChannel);
-
 
     return 0;
 }
