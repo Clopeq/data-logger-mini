@@ -169,7 +169,7 @@ unsigned char ADC_read_register(unsigned char reg) {
     SPI_write(1); // no op byte (opcode 2)
     // delay 1ms (?)
     temp = SPI_read();
-    cout << "Read byte: " << temp << endl;
+    cout << "Read byte: " << bitset<8>(temp) << endl;
     digitalWrite(CS_PIN, 1);
     return temp;
 }
@@ -178,7 +178,7 @@ unsigned char ADC_init(int rate) {
     ADC_reset();
     unsigned char ID = (ADC_read_register(REG_ID));
 
-    cout << "ID: " << ID << endl;
+    cout << "ID: " << bitset<8>(ID) << endl;
 
     return 0;
 }
