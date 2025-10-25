@@ -70,6 +70,7 @@ int main() {
     returnvalue = wiringPiSPIDataRW(spiChannel, spiData, 2);
 
     cout << bitset<8>(spiData[0]) << endl;
+    cout << bitset<8>(spiData[1]) << endl;
 
     wiringPiSPIClose(spiChannel);
 
