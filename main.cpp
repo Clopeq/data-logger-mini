@@ -44,6 +44,7 @@ using namespace std;
 
 
 
+
 int main() {
     
     cout << "Hello, World!" << endl;
@@ -58,14 +59,32 @@ int main() {
         // error
         cout << "Could not initialize SPI communication" << endl;
         return 0;
+    } else {
+        cout << "SPI communication established successfully" << endl;
     }
 
-    cout << "SPI communication established successfully" << endl;
+    sleep(0.1);
 
-    sleep(1);
 
     unsigned char spiData[20];
     int returnvalue;
+    spiData[0] = 0b00000110;
+    spiData[0] = 0;
+
+    for(int i=2; i<20; i++) {
+        spiData[i] = 0;
+    }
+    
+    returnvalue = wiringPiSPIDataRW(spiChannel, spiData, 20);
+
+    for(int i=0; i<20; i++) {
+        cout << bitset<8>(spiData[i]) << endl;
+    }
+
+    cout << "RESET COMPLETE!" << endl;
+    
+    sleep(0.1);
+
 
     spiData[0] = 0b00100000;
     spiData[1] = 18;
