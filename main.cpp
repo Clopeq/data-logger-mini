@@ -20,6 +20,7 @@
 // #endif
 
 #include <wiringPi.h>
+#include <wiringPiSPI.h>
 
 //#include "Loadcell.h"
 
