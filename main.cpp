@@ -14,11 +14,20 @@ int main() {
 
     //cout << "ID: " << bitset<8>(ID) << endl;
 
-    ADC.set_data_rate(SPS_2d5);
 
-    int gain = ADC.read_register(REG_MODE2);
+    int mode2 = ADC.read_register(REG_MODE2);
 
-    cout << "MODE2: " << bitset<8>(gain) << endl;
+    cout << endl;
+    cout << "Initial MODE2: " << bitset<8>(mode2) << endl;
+
+    
+    ADC.set_data_rate(SPS_5);
+
+    
+    mode2 = ADC.read_register(REG_MODE2);
+
+    cout << endl;
+    cout << "After change MODE2: " << bitset<8>(mode2) << endl;
 
     return 0;
 }
