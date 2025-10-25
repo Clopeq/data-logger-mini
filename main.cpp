@@ -8,6 +8,13 @@
 #include <bitset>
 #include <unistd.h>
 
+
+enum WPIPinType {
+    WPI_PIN_BCM,
+    WPI_PIN_WPI,
+    WPI_PIN_PHYS
+};
+
 #if defined(__has_include)
     #if __has_include(<wiringPi.h>)
         #include <wiringPi.h>
@@ -19,6 +26,9 @@
         inline int wiringPiSPIClose(int channel) { return -1; }
         inline int wiringPiSPIClose(int channel) { return -1; }
         inline int wiringPiSPIDataRW (int channel, unsigned char *data, int len) { return -1; }
+        inline int wiringPiSetupPinType(enum WPIPinType pinType) { return -1; }
+        inline void pinMode(int pin, int mode);
+        inline void digitalWrite(int pin, int value);
     #endif
 #else
     #include <wiringPi.h>
@@ -49,7 +59,13 @@ int main() {
     
     cout << "Hello, World!" << endl;
 
-    //wiringPiSetupPinType(WPI_PIN_WPI);
+    wiringPiSetupPinType(WPI_PIN_BCM);
+    pinMode(8, OUTPUT);
+    pinMode(7, OUTPUT);
+    digitalWrite(8, 1);
+    digitalWrite(7, 1);
+
+
 
     const int spiChannel = 0;
     const int spiSpeedInit = 250*1000;
@@ -65,6 +81,10 @@ int main() {
 
     sleep(0.1);
 
+    // -------------------------------------------------------------------------------------
+
+    cout << "TRY CS0" << endl;
+    digitalWrite(8, 0);
 
     unsigned char spiData[20];
     int returnvalue;
@@ -98,6 +118,39 @@ int main() {
         cout << bitset<8>(spiData[i]) << endl;
     }
 
+
+    cout << endl << "------------------------------------------------" << endl;
+    cout << "TRY CS1" << endl;
+
+        spiData[0] = 0b00000110;
+    spiData[0] = 0;
+
+    for(int i=2; i<20; i++) {
+        spiData[i] = 0;
+    }
+    
+    returnvalue = wiringPiSPIDataRW(spiChannel, spiData, 20);
+
+    for(int i=0; i<20; i++) {
+        cout << bitset<8>(spiData[i]) << endl;
+    }
+
+    cout << "RESET COMPLETE!" << endl;
+    
+    sleep(0.1);
+
+
+    spiData[0] = 0b00100000;
+    spiData[1] = 18;
+    for(int i=2; i<20; i++) {
+        spiData[i] = 0;
+    }
+
+    returnvalue = wiringPiSPIDataRW(spiChannel, spiData, 20);
+
+    for(int i=0; i<20; i++) {
+        cout << bitset<8>(spiData[i]) << endl;
+    }
 
     wiringPiSPIClose(spiChannel);
 
