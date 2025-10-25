@@ -146,17 +146,7 @@ void ADC_reset() {
     sleep(0.3);
 }
 
-unsigned char ADC_read_register(unsigned char reg) {
-    unsigned char temp = 0;
-    digitalWrite(CS_PIN, 0);
-    SPI_write(CMD_RREG | reg); // CMD_RREG 0b 001r rrrr
-    SPI_write(0x00); // no op byte (opcode 2)
-    // delay 1ms (?)
-    temp = SPI_read();
-    cout << "Read byte: " << temp << endl;
-    digitalWrite(CS_PIN, 1);
-    return temp;
-}
+
 
 unsigned char SPI_write(unsigned char value) {
     unsigned char temp = 0;
@@ -170,6 +160,17 @@ unsigned char SPI_read() {
     return SPI_write(0x00);
 }
 
+unsigned char ADC_read_register(unsigned char reg) {
+    unsigned char temp = 0;
+    digitalWrite(CS_PIN, 0);
+    SPI_write(CMD_RREG | reg); // CMD_RREG 0b 001r rrrr
+    SPI_write(0x00); // no op byte (opcode 2)
+    // delay 1ms (?)
+    temp = SPI_read();
+    cout << "Read byte: " << temp << endl;
+    digitalWrite(CS_PIN, 1);
+    return temp;
+}
 
 unsigned char ADC_init(int rate) {
     ADC_reset();
