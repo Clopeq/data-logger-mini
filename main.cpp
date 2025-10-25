@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <iostream>
+
+#include <wiringPi.h>
 //#include "Loadcell.h"
 
 using namespace std;
