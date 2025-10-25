@@ -57,6 +57,11 @@ void ADS1263::set_data_rate(ADC_DRATE new_drate) {
     buf &= 11110000;                                    // sets DRATE bits to 0, keeps GAIN bits as is
     buf |= (unsigned char)new_drate;                    // sets DRATE bits to the commanded value
 
+    if(debug) {
+        cout << "set_data_rate" << endl;
+        cout << "new_reg_value: " << bitset<8>(buf) << endl;
+    }
+
     write_register(REG_MODE2, buf);                     // push to the register
 }
 
@@ -66,6 +71,11 @@ void ADS1263::set_gain(ADC_GAIN new_gain) {
     unsigned char buf = read_register(REG_MODE2);       // reads current REG_MODE2
     buf &= 10001111;                                    // sets GAIN bits to 0, keeps DRATE bits as is
     buf |= ((unsigned char)new_gain)<<4;                // sets GAIN bits to the commanded value
+
+    if(debug) {
+        cout << "set_gain" << endl;
+        cout << "new_reg_value: " << bitset<8>(buf) << endl;
+    }
 
     write_register(REG_MODE2, buf);                     // push to the register
 }
