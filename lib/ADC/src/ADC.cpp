@@ -79,9 +79,11 @@ unsigned char ADS1263::write_register(ADC_REG reg, unsigned char val) {
     unsigned char buf = 0;
     unsigned char command = (unsigned char)CMD_WREG | (unsigned char)reg;
 
+    digitalWrite(CS_PIN,  LOW);
     SPI_write(command);
     SPI_write(CMD_NOP);
     SPI_write(val);
+    digitalWrite(CS_PIN, HIGH);
 
     if(debug) {
         cout << "#### write_register() ####" << endl;
