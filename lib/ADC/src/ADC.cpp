@@ -1,12 +1,9 @@
 #include <iostream>
 #include <bitset>
 #include "ADC.h"    
-//#include "WPI.h"    // wiringPi
+#include "WPI.h"    // wiringPi
 #include "sleep.h"  
 #include "config.h" // configuration constans and flags
-
-#include <wiringPi.h>
-#include <wiringPiSPI.h>
 
 using namespace std;
 
