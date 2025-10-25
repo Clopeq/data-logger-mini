@@ -42,6 +42,7 @@
         inline int wiringPiSetupPinType(enum WPIPinType pinType) { return -1; }
         inline void pinMode(int pin, enum WPIPinMode mode);
         inline void digitalWrite(int pin, int value);
+        inline int wiringPiSPISetupMode(int channel, int speed, int mode) { return -1; }
     #endif
 #else
     #include <wiringPi.h>
@@ -55,7 +56,7 @@ const int RST_PIN = 18;
 const int CS_PIN = 22;
 const int DRDY_PIN = 17;
 const int SPI_CHANNEL = 0;
-const int SPI_RATE = 250 * 1000;
+const int SPI_RATE = 500000;
 
 void sleep(int milliseconds) {
     std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
@@ -155,11 +156,9 @@ void ADC_reset() {
 
 
 unsigned char SPI_write(unsigned char value) {
-    unsigned char temp = 0;
-    wiringPiSPIDataRW(SPI_CHANNEL, &value, 1);
-    temp = value;
-
-    return temp;
+    unsigned char buf = value;
+    wiringPiSPIDataRW(SPI_CHANNEL, &buf, 1);
+    return buf; // received byte
 }
 
 unsigned char SPI_read() {
@@ -171,7 +170,7 @@ unsigned char ADC_read_register(unsigned char reg) {
     digitalWrite(CS_PIN, 0);
     SPI_write(CMD_RREG | reg); // CMD_RREG 0b 001r rrrr
     cout << "COMMAND: " << bitset<8>(CMD_RREG | reg) << endl;
-    SPI_write(1); // no op byte (opcode 2)
+    SPI_write(0x00); // no op byte (opcode 2)
     // delay 1ms (?)
     temp = SPI_read();
     cout << "Read byte: " << bitset<8>(temp) << endl;
@@ -195,7 +194,7 @@ int main() {
 
     setupGPIO();
 
-    wiringPiSPISetup(SPI_CHANNEL, SPI_RATE);
+    wiringPiSPISetupMode(SPI_CHANNEL, SPI_RATE, 1);
 
     ADC_init(0);
 
