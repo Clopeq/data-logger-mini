@@ -50,7 +50,7 @@ int main() {
 
     //wiringPiSetupPinType(WPI_PIN_WPI);
 
-    const int spiChannel = 1;
+    const int spiChannel = 0;
     const int spiSpeedInit = 250*1000;
     int hSPI;
 
@@ -64,18 +64,18 @@ int main() {
 
     sleep(1);
 
-    unsigned char spiData[2];
+    unsigned char spiData[4];
     int returnvalue;
 
     spiData[0] = 0b00100000;
     spiData[1] = 0b0000010;
-    // for(int i=1; i<10; i++) {
-    //     spiData[i] = 0;
-    // }
+    for(int i=2; i<4; i++) {
+        spiData[i] = 0;
+    }
 
-    returnvalue = wiringPiSPIDataRW(spiChannel, spiData, 2);
+    returnvalue = wiringPiSPIDataRW(spiChannel, spiData, 4);
 
-    for(int i=0; i<2; i++) {
+    for(int i=0; i<4; i++) {
         cout << bitset<8>(spiData[1]) << endl;
     }
 
