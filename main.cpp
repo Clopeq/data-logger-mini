@@ -50,7 +50,7 @@ int main() {
 
     //wiringPiSetupPinType(WPI_PIN_WPI);
 
-    const int spiChannel = 0;
+    const int spiChannel = 1;
     const int spiSpeedInit = 250*1000;
     int hSPI;
 
