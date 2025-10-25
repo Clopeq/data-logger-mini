@@ -17,6 +17,8 @@ public:
     void close();
     long double read();
     void set_debug(bool state);
+    void set_data_rate(ADC_DRATE drate);
+    void set_gain(ADC_GAIN gain);
     unsigned char read_register(ADC_REG reg);
     unsigned char write_register(ADC_REG reg, unsigned char value);
 

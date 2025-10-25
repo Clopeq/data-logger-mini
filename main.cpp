@@ -14,5 +14,7 @@ int main() {
 
     cout << "ID: " << bitset<8>(ID) << endl;
 
+    ADC.set_data_rate(SPS_2d5);
+
     return 0;
 }

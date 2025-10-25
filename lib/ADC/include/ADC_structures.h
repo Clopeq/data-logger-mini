@@ -1,5 +1,38 @@
 #pragma once
 
+
+// REG_MODE2 [BYPASS][3 bits GAIN][4 bits DRATE]
+typedef enum
+{
+    GAIN_1   = 0b000,  // 0
+    GAIN_2   = 0b001,  // 1
+    GAIN_4   = 0b010,  // 2
+    GAIN_8   = 0b011,  // 3
+    GAIN_16  = 0b100,  // 4
+    GAIN_32  = 0b101,  // 5
+    GAIN_64  = 0b110   // 6
+} ADC_GAIN;
+
+typedef enum
+{
+    SPS_2d5   = 0b0000,  // 0
+    SPS_5     = 0b0001,  // 1
+    SPS_10    = 0b0010,  // 2
+    SPS_16d6  = 0b0011,  // 3
+    SPS_20    = 0b0100,  // 4
+    SPS_50    = 0b0101,  // 5
+    SPS_60    = 0b0110,  // 6
+    SPS_100   = 0b0111,  // 7
+    SPS_400   = 0b1000,  // 8
+    SPS_1200  = 0b1001,  // 9
+    SPS_2400  = 0b1010,  // 10
+    SPS_4800  = 0b1011,  // 11
+    SPS_7200  = 0b1100,  // 12
+    SPS_14400 = 0b1101,  // 13
+    SPS_19200 = 0b1110,  // 14
+    SPS_38400 = 0b1111   // 15
+} ADC_DRATE;
+
 // List of all ADC commands
 typedef enum
 {
@@ -18,9 +51,7 @@ typedef enum
     CMD_SYGCAL2 = 0x1C, // ADC2 system gain calibration, 0001 1100 (1Ch)
     CMD_SFOCAL2 = 0x1E, // ADC2 self offset calibration, 0001 1110 (1Eh)
     CMD_RREG    = 0x20, // Read registers 001r rrrr (20h+000r rrrr)
-    CMD_RREG2   = 0x00, // number of registers to read minus 1, 000n nnnn
     CMD_WREG    = 0x40, // Write registers 010r rrrr (40h+000r rrrr)
-    CMD_WREG2   = 0x00, // number of registers to write minus 1, 000n nnnn
 } ADC_CMD;
 
 

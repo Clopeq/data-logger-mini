@@ -50,6 +50,10 @@ void ADS1263::set_debug(bool state) {
     debug = state;
 }
 
+void ADS1263::set_data_rate(ADC_DRATE drate) {
+    write_register(REG_MODE2, (unsigned char)drate);
+}
+
 unsigned char ADS1263::read_register(ADC_REG reg) {
     unsigned char buf = 0;
     unsigned char command = (unsigned char)CMD_RREG | (unsigned char)reg;
@@ -71,7 +75,11 @@ unsigned char ADS1263::read_register(ADC_REG reg) {
 
 
 unsigned char ADS1263::write_register(ADC_REG reg, unsigned char val) {
-    cout << "Rgister writing is not yet implemented, this call did nothing" << endl;
+    unsigned char buf = 0;
+    unsigned char command = (unsigned char)CMD_WREG | (unsigned char)reg;
+
+    cout << "Write register!" << endl;
+    cout << "command: " << bitset<8>(command) << endl;
     return 0;
 }
 
