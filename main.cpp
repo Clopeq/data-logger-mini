@@ -47,7 +47,7 @@ int main() {
     const int spiSpeedInit = 250*1000;
     int hSPI;
 
-    if ((hSPI = wiringPiSPISetup(spiChannel, spiSpeedInit)) < 0) {
+    if ((hSPI = wiringPiSetup(spiChannel, spiSpeedInit)) < 0) {
         // error
         cout << "Could not initialize SPI communication" << endl;
         return 0;
@@ -56,7 +56,7 @@ int main() {
     cout << "SPI communication established successfully" << endl;
 
 
-    wiringPiSPIClose(spiChannel);
+    wiringPiClose(spiChannel);
 
     return 0;
 }
