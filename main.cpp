@@ -12,7 +12,7 @@ int main() {
 
     int ID = ADC.read_register(REG_ID);
 
-    cout << "ID: " << bitset<8>(ID) << endl;
+    //cout << "ID: " << bitset<8>(ID) << endl;
 
     ADC.set_data_rate(SPS_2d5);
 

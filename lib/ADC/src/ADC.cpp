@@ -66,6 +66,7 @@ unsigned char ADS1263::read_register(ADC_REG reg) {
     digitalWrite(CS_PIN, HIGH); // Reset CS_PIN back to HIGH (stop SPI communication)
 
     if(debug) {
+        cout << "#### read_register() ####" << endl;
         cout << "COMMAND: " << bitset<8>(command) << endl;
         cout << "register: " << bitset<8>(buf) << endl;
     }
@@ -82,8 +83,11 @@ unsigned char ADS1263::write_register(ADC_REG reg, unsigned char val) {
     SPI_write(CMD_NOP);
     SPI_write(val);
 
-    cout << "Write register!" << endl;
-    cout << "command: " << bitset<8>(command) << endl;
+    if(debug) {
+        cout << "#### write_register() ####" << endl;
+        cout << "command: " << bitset<8>(command) << endl;
+        cout << "value: " << val << endl;
+    }
     return 0;
 }
 
