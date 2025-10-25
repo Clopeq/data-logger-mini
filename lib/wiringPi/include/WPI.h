@@ -1,9 +1,14 @@
 #pragma once
 
+#include <iostream>
+
+using namespace std;
+
 #if defined(__has_include)
     #if __has_include(<wiringPi.h>)
         #include <wiringPi.h>
         #include <wiringPiSPI.h>
+        cout << "RASPBERRY" << endl;
     #else
         // wiringPi header not available for IntelliSense/host build — provide minimal stubs
         // so the editor doesn't flag missing include while the code still compiles on Raspberry Pi.
