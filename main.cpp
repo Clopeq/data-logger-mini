@@ -166,7 +166,7 @@ unsigned char ADC_read_register(unsigned char reg) {
     digitalWrite(CS_PIN, 0);
     SPI_write(CMD_RREG | reg); // CMD_RREG 0b 001r rrrr
     cout << "COMMAND: " << bitset<8>(CMD_RREG | reg) << endl;
-    SPI_write(1); // no op byte (opcode 2)
+    //SPI_write(1); // no op byte (opcode 2)
     // delay 1ms (?)
     temp = SPI_read();
     cout << "Read byte: " << bitset<8>(temp) << endl;
