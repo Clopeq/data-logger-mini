@@ -15,7 +15,7 @@ int main() {
     //cout << "ID: " << bitset<8>(ID) << endl;
 
 
-    cout << "Initial MODE2: " << endl;
+    cout << "Initial value: " << endl;
     int mode2 = ADC.read_register(REG_MODE2);
     cout << endl;
 
