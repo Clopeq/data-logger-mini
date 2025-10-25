@@ -52,6 +52,7 @@ void ADS1263::set_debug(bool state) {
 
 void ADS1263::set_data_rate(ADC_DRATE drate) {
     write_register(REG_MODE2, (unsigned char)drate);
+    write_register(REG_MODE2, 0x0);
 }
 
 unsigned char ADS1263::read_register(ADC_REG reg) {
@@ -77,6 +78,10 @@ unsigned char ADS1263::read_register(ADC_REG reg) {
 unsigned char ADS1263::write_register(ADC_REG reg, unsigned char val) {
     unsigned char buf = 0;
     unsigned char command = (unsigned char)CMD_WREG | (unsigned char)reg;
+
+    SPI_write(command);
+    SPI_write(CMD_NOP);
+    SPI_write(val);
 
     cout << "Write register!" << endl;
     cout << "command: " << bitset<8>(command) << endl;
