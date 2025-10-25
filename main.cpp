@@ -61,16 +61,20 @@ int main() {
 
     cout << "SPI communication established successfully" << endl;
 
-    unsigned char spiData[2];
+    unsigned char spiData[10];
     int returnvalue;
 
     spiData[0] = 0b00100000;
-    spiData[1] = 0;
+    for(int i=1; i<10; i++) {
+        spiData[i] = 0;
+    }
 
-    returnvalue = wiringPiSPIDataRW(spiChannel, spiData, 2);
+    returnvalue = wiringPiSPIDataRW(spiChannel, spiData, 10);
 
-    cout << bitset<8>(spiData[0]) << endl;
-    cout << bitset<8>(spiData[1]) << endl;
+    for(int i=0; i<10; i++) {
+        cout << bitset<8>(spiData[1]) << endl;
+    }
+
 
     wiringPiSPIClose(spiChannel);
 
