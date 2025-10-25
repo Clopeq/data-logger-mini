@@ -55,6 +55,7 @@ const int RST_PIN = 18;
 const int CS_PIN = 22;
 const int DRDY_PIN = 17;
 const int SPI_CHANNEL = 0;
+const int SPI_RATE = 250 * 1000;
 
 void setupGPIO() {
     wiringPiSetupPinType(WPI_PIN_BCM);
@@ -188,7 +189,7 @@ int main() {
 
     setupGPIO();
 
-    wiringPiSetupPinType(WPI_PIN_BCM);
+    wiringPiSPISetup(SPI_CHANNEL, SPI_RATE);
 
     ADC_init(0);
 
