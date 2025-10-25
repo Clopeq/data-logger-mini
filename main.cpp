@@ -175,7 +175,7 @@ unsigned char ADC_read_register(unsigned char reg) {
 
 unsigned char ADC_init(int rate) {
     ADC_reset();
-    unsigned char ID = (ADC_read_register(REG_ID))>>5;
+    unsigned char ID = (ADC_read_register(REG_ID));
 
     cout << "ID: " << ID << endl;
 
