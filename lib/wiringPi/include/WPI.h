@@ -8,7 +8,6 @@ using namespace std;
     #if __has_include(<wiringPi.h>)
         #include <wiringPi.h>
         #include <wiringPiSPI.h>
-        cout << "RASPBERRY" << endl;
     #else
         // wiringPi header not available for IntelliSense/host build — provide minimal stubs
         // so the editor doesn't flag missing include while the code still compiles on Raspberry Pi.
