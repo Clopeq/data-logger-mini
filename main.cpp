@@ -5,8 +5,8 @@
 #include <string.h>
 #include <iostream>
 #include <bitset>
-#include <unistd.h>
-
+#include <chrono>
+#include <thread>
 
 
 // move the below preprocessor macro to wiringPi.h library
@@ -56,6 +56,11 @@ const int CS_PIN = 22;
 const int DRDY_PIN = 17;
 const int SPI_CHANNEL = 0;
 const int SPI_RATE = 250 * 1000;
+
+void sleep(int milliseconds) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
+}
+
 
 void setupGPIO() {
     wiringPiSetupPinType(WPI_PIN_BCM);
@@ -140,11 +145,11 @@ using namespace std;
 
 void ADC_reset() {
     digitalWrite(RST_PIN, HIGH);
-    sleep(0.3);
+    sleep(300);
     digitalWrite(RST_PIN, LOW);
-    sleep(0.3);
+    sleep(300);
     digitalWrite(RST_PIN, HIGH);
-    sleep(0.3);
+    sleep(300);
 }
 
 
@@ -166,7 +171,7 @@ unsigned char ADC_read_register(unsigned char reg) {
     digitalWrite(CS_PIN, 0);
     SPI_write(CMD_RREG | reg); // CMD_RREG 0b 001r rrrr
     cout << "COMMAND: " << bitset<8>(CMD_RREG | reg) << endl;
-    //SPI_write(1); // no op byte (opcode 2)
+    SPI_write(1); // no op byte (opcode 2)
     // delay 1ms (?)
     temp = SPI_read();
     cout << "Read byte: " << bitset<8>(temp) << endl;
