@@ -52,7 +52,6 @@ void ADS1263::set_debug(bool state) {
 
 void ADS1263::set_data_rate(ADC_DRATE drate) {
     write_register(REG_MODE2, (unsigned char)drate);
-    write_register(REG_MODE2, 0x0);
 }
 
 unsigned char ADS1263::read_register(ADC_REG reg) {
