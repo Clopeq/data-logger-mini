@@ -88,6 +88,7 @@ int main() {
 
     cout << "TRY CS0" << endl;
     digitalWrite(8, 0);
+    sleep(0.1);
 
     unsigned char spiData[20];
     int returnvalue;
@@ -122,8 +123,14 @@ int main() {
     }
 
 
+    digitalWrite(8, 1);
+    sleep(0.1);
+
     cout << endl << "------------------------------------------------" << endl;
     cout << "TRY CS1" << endl;
+    
+    digitalWrite(7, 0);
+    sleep(0.1);
 
         spiData[0] = 0b00000110;
     spiData[0] = 0;
