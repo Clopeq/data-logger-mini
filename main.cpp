@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <iostream>
+#include <bitset>
 
 #if defined(__has_include)
     #if __has_include(<wiringPi.h>)
@@ -15,6 +16,8 @@
         // so the editor doesn't flag missing include while the code still compiles on Raspberry Pi.
         inline int wiringPiSPISetup(int channel, int speed) { return -1; }
         inline int wiringPiSPIClose(int channel) { return -1; }
+        inline int wiringPiSPIClose(int channel) { return -1; }
+        inline int wiringPiSPIDataRW (int channel, unsigned char *data, int len) { return -1; }
     #endif
 #else
     #include <wiringPi.h>
@@ -58,6 +61,15 @@ int main() {
 
     cout << "SPI communication established successfully" << endl;
 
+    unsigned char spiData[2];
+    int returnvalue;
+
+    spiData[0] = 0b00100000;
+    spiData[1] = 0;
+
+    returnvalue = wiringPiSPIDataRW(spiChannel, spiData, 2);
+
+    cout << bitset<8>(spiData[0]) << endl;
 
     wiringPiSPIClose(spiChannel);
 
