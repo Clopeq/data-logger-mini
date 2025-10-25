@@ -86,7 +86,7 @@ unsigned char ADS1263::write_register(ADC_REG reg, unsigned char val) {
     if(debug) {
         cout << "#### write_register() ####" << endl;
         cout << "command: " << bitset<8>(command) << endl;
-        cout << "value: " << val << endl;
+        cout << "value: " << bitset<8>(val) << endl;
     }
     return 0;
 }
