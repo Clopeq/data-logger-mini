@@ -32,4 +32,4 @@ add_executable(${PROJECT_NAME} main.cpp ${SRC_FILES})
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
 # Link the libraries
-target_link_libraries(${PROJECT_NAME} PRIVATE ADC wiringPi)# json sensors) # list all of the libraries
+target_link_libraries(${PROJECT_NAME} PRIVATE ADC WPI utilities)# json sensors) # list all of the libraries
