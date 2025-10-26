@@ -118,6 +118,7 @@ void ADS1263::set_gain(ADC_GAIN new_gain) {
         cout << "WARNING! The ADC1 gain has been set to GAIN_32" << endl;
 
         new_gain = GAIN_32;
+        gain = 32;
     }
         
     // REG_MODE2 structure: [BYPAS][3 bits GAIN][4 bits DRATE]
