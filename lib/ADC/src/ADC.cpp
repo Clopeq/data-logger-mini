@@ -144,9 +144,9 @@ double ADS1263::read(unsigned char channel) {
     
     cout << "Data ready for readout!" << endl;
     cout << "status: " << wfistatus.statusOK << endl;
-    cout << "pinBCM: " << wfistatus.pinBCM << endl;
-    cout << "edge: " << wfistatus.edge << endl;
-    cout << "timeStamp: " << wfistatus.timeStamp_us << " us" << endl;
+    // cout << "pinBCM: " << wfistatus.pinBCM << endl;
+    // cout << "edge: " << wfistatus.edge << endl;
+    // cout << "timeStamp: " << wfistatus.timeStamp_us << " us" << endl;
     cout << "digitalRead(DRDY): " << digitalRead(DRDY_PIN) << endl << endl;
 
     digitalWrite(CS_PIN,  LOW);
