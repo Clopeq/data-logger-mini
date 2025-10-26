@@ -122,7 +122,7 @@ void ADS1263::set_gain(ADC_GAIN new_gain) {
         for (int i=0; i<new_gain; i++) {
             gain *= 2;
         }
-        cout << "Cannot set gain to: GAIN_" << gain << " | ADC1 max gain is GAIN_32" << endl;
+        cout << "Cannot set gain to: GAIN_" << (int)gain << " | ADC1 max gain is GAIN_32" << endl;
         cout << "The ADC1 gain has been set to GAIN_32" << endl;
 
         new_gain = GAIN_32;

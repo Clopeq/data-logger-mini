@@ -18,8 +18,8 @@ int main() {
     ADC.read(0);
 
     for(int i=0; i<=6; i++) {
-        ADC.set_gain((ADC_GAIN)i);   
         cout << endl << "i = " << i << endl;
+        ADC.set_gain((ADC_GAIN)i);   
         // cout << "ADC.READ()" << endl;
         ADC.read(0);
     }
