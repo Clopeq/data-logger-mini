@@ -140,6 +140,7 @@ double ADS1263::read(unsigned char channel) {
     cout << "digitalRead(DRDY): " << digitalRead(DRDY_PIN) << endl;
     
     WPIWfiStatus wfistatus = waitForInterrupt2(DRDY_PIN, INT_EDGE_FALLING, 5000, 0);
+    sleep(1);
     
     cout << "Data ready for readout!" << endl;
     cout << "status: " << wfistatus.statusOK << endl;
