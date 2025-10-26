@@ -26,6 +26,54 @@ ADS1263::ADS1263(int datarate) { // init
     reset();
 
     change_mode(CONTINOUS); // default to PULSE mode
+
+    // set up input multiplexer (channel selection)
+    // INPMUX Register [4 bits MUXP][4 bits MUXN]
+    /* MUXP: 
+        Positive Input Multiplexer
+        Selects the positive input multiplexer.
+        0000: AIN0 (default)
+        0001: AIN1
+        0010: AIN2
+        0011: AIN3
+        0100: AIN4
+        0101: AIN5
+        0110: AIN6
+        0111: AIN7
+        1000: AIN8
+        1001: AIN9
+        1010: AINCOM
+        1011: Temperature sensor monitor positive
+        1100: Analog power supply monitor positive
+        1101: Digital power supply monitor positive
+        1110: TDAC test signal positive
+        1111: Float (open connection)
+    */
+    /* MUXN:
+        Negative Input Multiplexer
+        Selects the negative input multiplexer.
+        0000: AIN0
+        0001: AIN1 (default)
+        0010: AIN2
+        0011: AIN3
+        0100: AIN4
+        0101: AIN5
+        0110: AIN6
+        0111: AIN7
+        1000: AIN8
+        1001: AIN9
+        1010: AINCOM
+        1011: Temperature sensor monitor negative
+        1100: Analog power supply monitor negative
+        1101: Digital power supply monitor negative
+        1110: TDAC test signal negative
+        1111: Float (open connection)
+    */
+
+    unsigned char buf = read_register(REG_INPMUX);  // get currnet register value
+    buf &= 0b11110000;                              // keep Positive Input Multiplexer, zero out Negative Input Multiplexer 
+    buf |= 0b00001010;                              // Set MUXN to AINCOM - esentially set up to read single ended channel        
+    write_register(REG_INPMUX, buf);                // push to the register
 }
 
 ADS1263::~ADS1263() {
@@ -118,6 +166,14 @@ unsigned char ADS1263::write_register(ADC_REG reg, unsigned char val) {
         cout << "command: " << bitset<8>(command) << endl;
         cout << "value: " << bitset<8>(val) << endl;
     }
+
+    buf = read_register(reg);
+    if(buf != val) {
+        cout << "Writing to register (" << bitset<8>(reg) << ") has failed" << endl;
+        cout << "Requested value: " << bitset<8>(val) << " | Actual value: " << bitset<8>(buf) << endl;
+        return -1;
+    }
+
     return 0;
 }
 
