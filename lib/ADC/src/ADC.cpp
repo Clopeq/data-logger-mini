@@ -127,6 +127,7 @@ void ADS1263::set_gain(ADC_GAIN new_gain) {
     buf |= ((unsigned char)new_gain)<<4;                // sets GAIN bits to the commanded value
 
     if(debug) {
+        cout << "#### SET_GAIN() ####" << endl;
         cout << "set_gain: GAIN_" << gain << endl;
         cout << "new_reg_value: " << bitset<8>(buf) << endl;
     }
@@ -148,7 +149,7 @@ unsigned char ADS1263::read_register(ADC_REG reg) {
     if(debug) {
         cout << "#### read_register() ####" << endl;
         cout << "COMMAND: " << bitset<8>(command) << endl;
-        cout << "register: " << bitset<8>(buf) << endl;
+        cout << "Current reg value: " << bitset<8>(buf) << endl;
     }
 
     return buf;
@@ -183,7 +184,7 @@ unsigned char ADS1263::write_register(ADC_REG reg, unsigned char val) {
 
 void ADS1263::change_mode(ADC_RUNMODE mode) {
     // REG_MODE0 structure: [REFREV][RUNMODE][2 bits CHOP][4 bits DELAY]
-    unsigned char buf = read_register(REG_MODE2);           // reads current REG_MODE0
+    unsigned char buf = read_register(REG_MODE0);           // reads current REG_MODE0
     buf &= 0b11110000;                                      // sets RUNMODE bit to 0, keeps other bits as is
     buf |= (unsigned char)mode<<6;                          // sets RUNMODE bit to the commanded value
 
