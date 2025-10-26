@@ -34,6 +34,13 @@ typedef enum
     SPS_38400 = 0b1111   // 15
 } ADC_DRATE;
 
+typedef enum { // REG_ADC2CFG structure [2 bits DATARATE][3 bits REF2][3 bits GAIN]
+    SPS2_10  = 0b00,    // 0
+    SPS2_100 = 0b01,    // 1
+    SPS2_400 = 0b10,    // 2
+    SPS2_800 = 0b11,    // 3
+} ADC2_DRATE;
+
 // List of all ADC commands
 typedef enum
 {
@@ -109,13 +116,7 @@ typedef enum
     DELAY_8d8ms,
 }ADC_DELAY;
 
-typedef enum
-{
-    SPS_10  =   0,
-    SPS_100,
-    SPS_400,
-    SPS_800,
-}ADC2_DRATE;
+
 
 typedef enum
 {
