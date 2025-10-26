@@ -10,7 +10,7 @@ typedef enum
     GAIN_8   = 0b011,  // 3
     GAIN_16  = 0b100,  // 4
     GAIN_32  = 0b101,  // 5
-    GAIN_64  = 0b110,  // 6
+    GAIN_64  = 0b110,  // 6 - ADC2 ONLY!
     GAIN_128 = 0b111,  // 7 - ADC2 ONLY!
 } ADC_GAIN;
 

@@ -116,6 +116,17 @@ void ADS1263::set_data_rate(ADC_DRATE new_drate) {
 }
 
 void ADS1263::set_gain(ADC_GAIN new_gain) {
+
+    if((unsigned char)new_gain > 5) {
+        unsigned char gain = 1;
+        for (int i=0; i<new_gain; i++) {
+            gain *= 2;
+        }
+        cout << "Cannot set gain to: GAIN_" << gain << " | ADC1 max gain is GAIN_32" << endl;
+        cout << "The ADC1 gain has been set to GAIN_32" << endl;
+
+        new_gain = GAIN_32;
+    }
         
     // REG_MODE2 structure: [BYPAS][3 bits GAIN][4 bits DRATE]
     unsigned char buf = read_register(REG_MODE2);       // reads current REG_MODE2
