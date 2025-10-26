@@ -132,7 +132,7 @@ void ADS1263::change_mode(ADC_RUNMODE mode) {
 
 double ADS1263::read(unsigned char channel) {
     change_mode(PULSE);
-    
+
     digitalWrite(CS_PIN,  LOW);
     SPI_write(CMD_START1);
     digitalWrite(CS_PIN, HIGH);
@@ -146,7 +146,13 @@ double ADS1263::read(unsigned char channel) {
     cout << "pinBCM: " << wfistatus.pinBCM << endl;
     cout << "edge: " << wfistatus.edge << endl;
     cout << "timeStamp: " << wfistatus.timeStamp_us << " us" << endl;
-    cout << "digitalRead(DRDY): " << digitalRead(DRDY_PIN) << endl;
+    cout << "digitalRead(DRDY): " << digitalRead(DRDY_PIN) << endl << endl;
+
+    digitalWrite(CS_PIN,  LOW);
+    for(int i=0; i<6; i++) {
+        cout << "byte" << i << " :" << bitset<8>(SPI_read()) << endl;
+    }
+    digitalWrite(CS_PIN, HIGH);
 
     return 0;
 }
