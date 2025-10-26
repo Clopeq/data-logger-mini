@@ -25,7 +25,7 @@ ADS1263::ADS1263(int datarate) { // init
 
     reset();
 
-    change_mode(CONTINOUS); // default to PULSE/CONTINOUS mode
+    change_mode(PULSE); // default to PULSE/CONTINOUS mode
 
     // set up input multiplexer (channel selection)
     // INPMUX Register [4 bits MUXP][4 bits MUXN]
