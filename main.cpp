@@ -10,7 +10,7 @@ int main() {
 
     ADS1263 ADC(500*1000);
 
-    ADC.set_gain(GAIN_1);
+    ADC.set_gain(GAIN_4);
     ADC.set_data_rate(SPS_2d5);
 
     cout << endl;
