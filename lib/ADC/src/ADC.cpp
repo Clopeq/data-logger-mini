@@ -152,8 +152,8 @@ double ADS1263::read(unsigned char channel) {
     for(int i=0; i<6; i++) {
         cout << "byte" << i << " :" << bitset<8>(SPI_read()) << endl;
     }
+    SPI_write(CMD_STOP1);
     digitalWrite(CS_PIN, HIGH);
-
     
     cout << "digitalRead(DRDY): " << digitalRead(DRDY_PIN) << endl;
     return 0;
