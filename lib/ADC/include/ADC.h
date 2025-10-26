@@ -13,16 +13,24 @@ class ADS1263 {
 public:
     ADS1263(int datarate);
     ~ADS1263();
-    void reset();
-    void close();
-    long double read();
-    void set_debug(bool state);
-    void set_data_rate(ADC_DRATE drate);
+    // general use
+    double read(unsigned char channel);
+    double read_continous(unsigned char channel);
+    double read_all(unsigned char channel_list[]);
+    double read_all_continous(unsigned char channel_list[]);
+
+    // configuration
+    void change_mode(ADC_RUNMODE mode);
     void set_gain(ADC_GAIN gain);
+    void set_data_rate(ADC_DRATE drate);
+
+    // utility
     unsigned char read_register(ADC_REG reg);
     unsigned char write_register(ADC_REG reg, unsigned char value);
-    void change_mode(ADC_RUNMODE mode);
-    double read(unsigned char channel);
+    unsigned char set_channel(unsigned int channel);
+    void set_debug(bool state);
+    void reset();
+    void close();
 
 private:
     unsigned char SPI_write(unsigned char value);

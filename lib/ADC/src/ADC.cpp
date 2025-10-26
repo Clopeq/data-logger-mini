@@ -8,23 +8,33 @@
 using namespace std;
 
 
+ADS1263::ADS1263(int datarate) {
+    /* 
+        Constructor initializes the ADS1263 ADC:
+        - setup wiringPi SPI communication
+        - setup GPIO pins
+        - set default flags                     (NOTE: e.g. DEBUG flag)
+        - set default register values
+    */
 
-ADS1263::ADS1263(int datarate) { // init
-    // Setup GPIO
-    wiringPiSPISetupMode(SPI_CHANNEL, SPI_RATE, 1);
+    // setup SPI communication
+    wiringPiSPISetupMode(SPI_CHANNEL, SPI_RATE, 1);  // mode 1 - 
     wiringPiSetupPinType(WPI_PIN_BCM);
+
+    
+    // Setup GPIO
     pinMode(RST_PIN, OUTPUT);
     pinMode(CS_PIN, OUTPUT);
     pinMode(DRDY_PIN, INPUT);
-
     digitalWrite(RST_PIN, HIGH);
     digitalWrite(CS_PIN, HIGH);
     digitalWrite(DRDY_PIN, HIGH);
 
+    // set default flags                                                (TODO: load from .json)
     set_debug(DEBUG);
 
-    reset();
-
+    // set default registers                                            (TODO: load from .json)
+    reset();            // reset ADC
     change_mode(PULSE); // default to PULSE/CONTINOUS mode
 
     // set up input multiplexer (channel selection)
