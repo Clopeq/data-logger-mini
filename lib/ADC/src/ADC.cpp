@@ -132,7 +132,10 @@ void ADS1263::change_mode(ADC_RUNMODE mode) {
 
 double ADS1263::read(unsigned char channel) {
     change_mode(PULSE);
+    
+    digitalWrite(CS_PIN,  LOW);
     SPI_write(CMD_START1);
+    digitalWrite(CS_PIN, HIGH);
 
     cout << "digitalRead(DRDY): " << digitalRead(DRDY_PIN) << endl;
     
