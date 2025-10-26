@@ -154,6 +154,8 @@ double ADS1263::read(unsigned char channel) {
     }
     digitalWrite(CS_PIN, HIGH);
 
+    
+    cout << "digitalRead(DRDY): " << digitalRead(DRDY_PIN) << endl;
     return 0;
 }
 
