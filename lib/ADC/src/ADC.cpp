@@ -65,7 +65,7 @@ ADS1263::ADS1263(int datarate) { // init
     buf = read_register(REG_MODE1);     // get currnet register value
     buf &= 0b00011111;                  // reset FILTER to 0
     buf |= 0b00000000;                  // set new FILTER
-    write_register(REG_INPMUX, buf);    // push to the register
+    write_register(REG_MODE1, buf);    // push to the register
 }
 
 ADS1263::~ADS1263() {
