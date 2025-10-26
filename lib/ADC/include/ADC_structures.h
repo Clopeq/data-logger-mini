@@ -10,7 +10,8 @@ typedef enum
     GAIN_8   = 0b011,  // 3
     GAIN_16  = 0b100,  // 4
     GAIN_32  = 0b101,  // 5
-    GAIN_64  = 0b110   // 6
+    GAIN_64  = 0b110,  // 6
+    GAIN_128 = 0b111,  // 7 - ADC2 ONLY!
 } ADC_GAIN;
 
 typedef enum
@@ -86,3 +87,55 @@ typedef enum
     REG_ADC2FSC0   = 0x19,  // ADC2 Full-Scale Calibration 0 (00h)
     REG_ADC2FSC1   = 0x1A   // ADC2 Full-Scale Calibration 1 (40h)
 } ADC_REG;
+
+typedef enum {  // REG_MODE0 bit 6
+    CONTINOUS = 0,
+    PULSE = 1
+} ADC_RUNMODE;
+
+typedef enum
+{
+    DELAY_0s    = 0,
+    DELAY_8d7us,
+    DELAY_17us,
+    DELAY_35us,
+    DELAY_169us,
+    DELAY_139us,
+    DELAY_278us,
+    DELAY_555us,
+    DELAY_1d1ms,
+    DELAY_2d2ms,
+    DELAY_4d4ms,
+    DELAY_8d8ms,
+}ADC_DELAY;
+
+typedef enum
+{
+    SPS_10  =   0,
+    SPS_100,
+    SPS_400,
+    SPS_800,
+}ADC2_DRATE;
+
+typedef enum
+{
+    DAC_4V5        = 0b01001,      //4.5V
+    DAC_3V5        = 0b01000,
+    DAC_3V0          = 0b00111,
+    DAC_2V75       = 0b00110,
+    DAC_2V625      = 0b00101,
+    DAC_2V5625     = 0b00100,
+    DAC_2V53125    = 0b00011,
+    DAC_2V515625   = 0b00010,
+    DAC_2V5078125  = 0b00001,
+    DAC_2V5        = 0b00000,
+    DAC_2V4921875  = 0b10001,
+    DAC_2V484375   = 0b10010,
+    DAC_2V46875    = 0b10011,
+    DAC_2V4375     = 0b10100,
+    DAC_2V375      = 0b10101,
+    DAC_2V25       = 0b10110,
+    DAC_2V0          = 0b10111,
+    DAC_1V5        = 0b11000,
+    DAC_0V5        = 0b11001,
+}DAC_VOLT;

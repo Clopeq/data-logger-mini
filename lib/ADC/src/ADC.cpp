@@ -24,6 +24,8 @@ ADS1263::ADS1263(int datarate) { // init
     set_debug(DEBUG);
 
     reset();
+
+    change_mode(PULSE); // default to PULSE mode
 }
 
 ADS1263::~ADS1263() {
@@ -39,11 +41,11 @@ void ADS1263::close() {
 
 void ADS1263::reset() {
     digitalWrite(RST_PIN, HIGH);
-    sleep(300);
+    sleep(10);
     digitalWrite(RST_PIN, LOW);
-    sleep(300);
+    sleep(1);
     digitalWrite(RST_PIN, HIGH);
-    sleep(300);
+    sleep(10);
 }
 
 void ADS1263::set_debug(bool state) {
@@ -116,6 +118,29 @@ unsigned char ADS1263::write_register(ADC_REG reg, unsigned char val) {
         cout << "command: " << bitset<8>(command) << endl;
         cout << "value: " << bitset<8>(val) << endl;
     }
+    return 0;
+}
+
+void ADS1263::change_mode(ADC_RUNMODE mode) {
+    // REG_MODE0 structure: [REFREV][RUNMODE][2 bits CHOP][4 bits DELAY]
+    unsigned char buf = read_register(REG_MODE2);           // reads current REG_MODE0
+    buf &= 0b11110000;                                      // sets RUNMODE bit to 0, keeps other bits as is
+    buf |= (unsigned char)mode<<6;                          // sets RUNMODE bit to the commanded value
+
+    write_register(REG_MODE0, buf);                         // push to the register
+}
+
+double ADS1263::read(unsigned char channel) {
+    change_mode(PULSE);
+    SPI_write(CMD_START1);
+
+    cout << "digitalRead(DRDY): " << digitalRead(DRDY_PIN) << endl;
+    
+    waitForInterrupt2(DRDY_PIN, INT_EDGE_FALLING, 5000, 0);
+    
+    cout << "Data ready for readout!" << endl;
+    cout << "digitalRead(DRDY): " << digitalRead(DRDY_PIN) << endl;
+
     return 0;
 }
 

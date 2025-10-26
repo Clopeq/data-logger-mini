@@ -10,23 +10,12 @@ int main() {
 
     ADS1263 ADC(500*1000);
 
-    //int ID = ADC.read_register(REG_ID);
+    ADC.set_gain(GAIN_1);
+    ADC.set_data_rate(SPS_2d5);
 
-    //cout << "ID: " << bitset<8>(ID) << endl;
-
-
-    cout << "Initial value: " << endl;
-    int mode2 = ADC.read_register(REG_MODE2);
     cout << endl;
-
-    cout << "Set data rate" << endl;
-    ADC.set_data_rate(SPS_38400);
-    cout << endl;
-
+    cout << "ADC.READ()" << endl;
+    ADC.read(0);
     
-    cout << "Set gain" << endl;
-    ADC.set_gain(GAIN_2);
-    cout << endl;
-
     return 0;
 }

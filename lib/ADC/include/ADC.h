@@ -21,6 +21,8 @@ public:
     void set_gain(ADC_GAIN gain);
     unsigned char read_register(ADC_REG reg);
     unsigned char write_register(ADC_REG reg, unsigned char value);
+    void change_mode(ADC_RUNMODE mode);
+    double read(unsigned char channel);
 
 private:
     unsigned char SPI_write(unsigned char value);
