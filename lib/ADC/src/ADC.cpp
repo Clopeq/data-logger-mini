@@ -25,7 +25,7 @@ ADS1263::ADS1263(int datarate) { // init
 
     reset();
 
-    change_mode(PULSE); // default to PULSE mode
+    change_mode(CONTINOUS); // default to PULSE mode
 }
 
 ADS1263::~ADS1263() {
@@ -140,7 +140,7 @@ double ADS1263::read(unsigned char channel) {
     cout << "digitalRead(DRDY): " << digitalRead(DRDY_PIN) << endl;
     
     WPIWfiStatus wfistatus = waitForInterrupt2(DRDY_PIN, INT_EDGE_FALLING, 5000, 0);
-    sleep(1);
+    //sleep(1);
     
     cout << "Data ready for readout!" << endl;
     cout << "status: " << wfistatus.statusOK << endl;
