@@ -25,24 +25,16 @@ ADS1263::ADS1263(int datarate) { // init
 
     reset();
 
-    change_mode(CONTINOUS); // default to PULSE mode
+    change_mode(CONTINOUS); // default to PULSE/CONTINOUS mode
 
     // set up input multiplexer (channel selection)
     // INPMUX Register [4 bits MUXP][4 bits MUXN]
     /* MUXP: 
         Positive Input Multiplexer
         Selects the positive input multiplexer.
-        0000: AIN0 (default)
-        0001: AIN1
-        0010: AIN2
-        0011: AIN3
-        0100: AIN4
-        0101: AIN5
-        0110: AIN6
-        0111: AIN7
-        1000: AIN8
-        1001: AIN9
-        1010: AINCOM
+        0000: AIN0 (default)    0001: AIN1      0010: AIN2      0011: AIN3
+        0100: AIN4              0101: AIN5      0110: AIN6      0111: AIN7
+        1000: AIN8              1001: AIN9      1010: AINCOM
         1011: Temperature sensor monitor positive
         1100: Analog power supply monitor positive
         1101: Digital power supply monitor positive
@@ -52,17 +44,9 @@ ADS1263::ADS1263(int datarate) { // init
     /* MUXN:
         Negative Input Multiplexer
         Selects the negative input multiplexer.
-        0000: AIN0
-        0001: AIN1 (default)
-        0010: AIN2
-        0011: AIN3
-        0100: AIN4
-        0101: AIN5
-        0110: AIN6
-        0111: AIN7
-        1000: AIN8
-        1001: AIN9
-        1010: AINCOM
+        0000: AIN0      0001: AIN1 (default)    0010: AIN2      0011: AIN3
+        0100: AIN4      0101: AIN5              0110: AIN6      0111: AIN7
+        1000: AIN8      1001: AIN9              1010: AINCOM
         1011: Temperature sensor monitor negative
         1100: Analog power supply monitor negative
         1101: Digital power supply monitor negative
@@ -74,6 +58,14 @@ ADS1263::ADS1263(int datarate) { // init
     buf &= 0b11110000;                              // keep Positive Input Multiplexer, zero out Negative Input Multiplexer 
     buf |= 0b00001010;                              // Set MUXN to AINCOM - esentially set up to read single ended channel        
     write_register(REG_INPMUX, buf);                // push to the register
+
+
+    // set the default filter (FIR filter limits the sample rate to SPS_20)
+    // MDOE1 register [3 bits FILTER][SBADC][SBPOL][3 bits SBMAG]
+    buf = read_register(REG_MODE1);     // get currnet register value
+    buf &= 0b00011111;                  // reset FILTER to 0
+    buf |= 0b00000000;                  // set new FILTER
+    write_register(REG_INPMUX, buf);    // push to the register
 }
 
 ADS1263::~ADS1263() {
@@ -122,8 +114,8 @@ void ADS1263::set_gain(ADC_GAIN new_gain) {
         for (int i=0; i<new_gain; i++) {
             gain *= 2;
         }
-        cout << "Cannot set gain to: GAIN_" << (int)gain << " | ADC1 max gain is GAIN_32" << endl;
-        cout << "The ADC1 gain has been set to GAIN_32" << endl;
+        cout << "WARNING! Cannot set gain to: GAIN_" << (int)gain << " | ADC1 max gain is GAIN_32" << endl;
+        cout << "WARNING! The ADC1 gain has been set to GAIN_32" << endl;
 
         new_gain = GAIN_32;
     }
