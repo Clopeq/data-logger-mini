@@ -108,13 +108,13 @@ void ADS1263::set_data_rate(ADC_DRATE new_drate) {
 }
 
 void ADS1263::set_gain(ADC_GAIN new_gain) {
+    unsigned int gain = 1;             // numerical representation of actual gain value, used for DEBUG
+    for (int i=0; i<new_gain; i++) {
+        gain *= 2;
+    }
 
     if((unsigned char)new_gain > 5) {
-        unsigned char gain = 1;
-        for (int i=0; i<new_gain; i++) {
-            gain *= 2;
-        }
-        cout << "WARNING! Cannot set gain to: GAIN_" << (int)gain << " | ADC1 max gain is GAIN_32" << endl;
+        cout << "WARNING! Cannot set gain to: GAIN_" << gain << " | ADC1 max gain is GAIN_32" << endl;
         cout << "WARNING! The ADC1 gain has been set to GAIN_32" << endl;
 
         new_gain = GAIN_32;
@@ -126,7 +126,7 @@ void ADS1263::set_gain(ADC_GAIN new_gain) {
     buf |= ((unsigned char)new_gain)<<4;                // sets GAIN bits to the commanded value
 
     if(debug) {
-        cout << "set_gain" << endl;
+        cout << "set_gain: GAIN_" << gain << endl;
         cout << "new_reg_value: " << bitset<8>(buf) << endl;
     }
 
