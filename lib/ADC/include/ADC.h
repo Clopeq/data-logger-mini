@@ -42,6 +42,8 @@ private:
     long double a;
     long double b;
     int spi_rate;
-    double ref;
+    double vref;
+    ADC_GAIN gain;
+    ADC_DRATE drate;
     bool debug;
 };
