@@ -125,7 +125,7 @@ void ADS1263::change_mode(ADC_RUNMODE mode) {
 
 unsigned char ADS1263::set_gain(ADC_GAIN new_gain) {
     if (new_gain == get_gain()) {           // the currently set gain is the same as requested -> nothing to do
-        return;
+        return 1;
     }
 
     // max GAIN for ADC1 is GAIN_32, GAIN_64 and GAIN_128 are only available for ADC2
@@ -181,7 +181,7 @@ unsigned char ADS1263::set_data_rate(ADC_DRATE new_drate) {
     */
 
     if (new_drate == get_data_rate()) {     // the currently set data rate is the same as requested -> nothing to do
-        return;
+        return 1;
     }
 
     unsigned char buf = read_register(REG_MODE2);           // reads current REG_MODE2
