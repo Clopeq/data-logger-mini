@@ -2,7 +2,7 @@
 
 
 // GLOBAL Flags
-#define DEBUG true          // If true additional messages will be printed to the command line
+#define DEBUG false          // If true additional messages will be printed to the command line
 #define VREF 5.08           // default ADC voltage reference
 
 // Raspberry pinout
