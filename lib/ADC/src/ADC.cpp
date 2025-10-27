@@ -79,11 +79,13 @@ double ADS1263::read(unsigned char channel) {
     WPIWfiStatus wfistatus = waitForInterrupt2(DRDY_PIN, INT_EDGE_FALLING, 50, 0);      // 50 ms timeout
     //sleep(1);
     
-    cout << "Data ready for readout!" << endl;
-    cout << "status: " << wfistatus.statusOK << endl;
-    // cout << "pinBCM: " << wfistatus.pinBCM << endl;
-    // cout << "edge: " << wfistatus.edge << endl;
-    // cout << "timeStamp: " << wfistatus.timeStamp_us << " us" << endl;
+    if(debug) {
+        cout << "Data ready for readout!" << endl;
+        cout << "status: " << wfistatus.statusOK << endl;
+        // cout << "pinBCM: " << wfistatus.pinBCM << endl;
+        // cout << "edge: " << wfistatus.edge << endl;
+        // cout << "timeStamp: " << wfistatus.timeStamp_us << " us" << endl;
+    }
 
     
     unsigned char buf[4];

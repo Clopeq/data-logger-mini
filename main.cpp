@@ -1,6 +1,7 @@
 #include <iostream>
 #include <bitset>
 #include "ADC.h"
+#include "sleep.h"
 
 using namespace std;
 
@@ -17,8 +18,9 @@ int main() {
     cout << "ADC.READ()" << endl;
     ADC.read(0);
 
-    for(int i=0; i<=6; i++) {
-        cout << "CH" << i << ": " << ADC.read(0) << endl;
+    for(int i=0; i<=1000; i++) {
+        cout << i << ": " << ADC.read(0) << endl;
+        sleep(10);
     }
     
     return 0;
