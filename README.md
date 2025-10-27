@@ -1,10 +1,17 @@
 # data-logger-mini
 
 ```C++
-function test() {
-  console.log("notice the blank line before this function?");
+void foo() {
+  std::cout << "Example code snippet" << std::endl;
 }
 ```
 
 
-<a href="ADS1263.pdf#page=88">ADS1263 datasheet</a>
+<a href="Documentation/ADS1263.pdf">ADS1263 datasheet</a>
+
+# Register map
+
+![image](Documentation/register_map.png)
+
+# ADC Commands
+![image](Documentation/ADS1263_commands.png)

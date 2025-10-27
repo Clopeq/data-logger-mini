@@ -117,7 +117,7 @@ static UBYTE ADS1263_Checksum(UDOUBLE val, UBYTE byt)
         sum += val & mask;  // only add the lower values
         val >>= 8;          // shift down
     }
-    sum += 0x9b;
+    sum += 0x9b;            // as per datasheet
     // printf("--- %x %x--- \r\n", sum, byt);
     return sum ^ byt;       // if equal, this will be 0
 }
@@ -392,7 +392,7 @@ static UDOUBLE ADS1263_Read_ADC1_Data(void)
         DEV_SPI_WriteByte(CMD_RDATA1);
         // DEV_Delay_ms(10);
         Status = DEV_SPI_ReadByte();
-    }while((Status & 0x40) == 0);
+    } while((Status & 0x40) == 0);      // where timeout?
     
     buf[0] = DEV_SPI_ReadByte();
     buf[1] = DEV_SPI_ReadByte();
