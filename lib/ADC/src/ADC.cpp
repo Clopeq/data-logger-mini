@@ -130,11 +130,14 @@ double ADS1263::read(PortManager port) {
                             (static_cast<int32_t>(buf[2])<<8) |
                             (static_cast<int32_t>(buf[3]));
 
+    
+    double result = static_cast<double>(combined_buf) * static_cast<double>(static_cast<int32_t>(vref/ADC_GAIN_toint(gain)) / 0x7FFFFF);
+
     // for positive numbers: input_code/(2^31-1) * VREF/GAIN
     // for negative numbers: input_code/(2^31) * VREF/GAIN
     // Above approach should effectivly apply the scaling factor to the raw output.
     // double voltage = static_cast<double>(combined_buf/0x7FFFFF * vref/(static_cast<int>(gain)));
-    return static_cast<double>(combined_buf);
+    return result;
 }
 
 // #################################################################################################

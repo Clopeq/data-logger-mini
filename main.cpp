@@ -19,7 +19,7 @@ int main() {
     PortManager CH0(A0, COMM, 0, 1);
 
 
-    for(int i=0; i<=5000; i++) {
+    for(int i=0; i<=1000; i++) {
         cout << i << ": " << ADC.read(CH0) << endl;
         sleep(10);
     }
