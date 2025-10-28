@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ADC_structures.h"
+#include "ADC_port_manager.h"
 
 
 unsigned char ADC_read(unsigned char channel);
@@ -15,7 +16,7 @@ public:
     ~ADS1263();
     
     // general use
-    double read(unsigned char channel);
+    double read(PortManager port);
     double read_continous(unsigned char channel);
     double read_all(unsigned char channel_list[]);
     double read_all_continous(unsigned char channel_list[]);
@@ -30,7 +31,6 @@ public:
     // utility
     unsigned char read_register(ADC_REG reg);
     unsigned char write_register(ADC_REG reg, unsigned char value);
-    unsigned char set_channel(unsigned int channel);
     void set_debug(bool state);
     void reset();
     void close();
@@ -38,6 +38,10 @@ public:
 private:
     unsigned char SPI_write(unsigned char value);
     unsigned char SPI_read();
+    unsigned char set_channel_positive(CHANNEL channel);
+    unsigned char set_channel_negative(CHANNEL channel);
+    CHANNEL get_channel_positive();
+    CHANNEL get_channel_negative();
 
     long double a;
     long double b;
@@ -46,4 +50,9 @@ private:
     ADC_GAIN gain;
     ADC_DRATE drate;
     bool debug;
+    CHANNEL current_channel_positive;
+    CHANNEL current_channel_negative;
+
 };
+
+

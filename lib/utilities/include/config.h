@@ -19,3 +19,5 @@
 
 #define SPI_CHANNEL 0       // Raspberry pi SPI channel to which ADC is connected
 #define SPI_RATE 500000     // clock speed for SPI communication, use < 1MHz for register read/write, otherwise up to 8 MHz is allowable
+
+

@@ -1,10 +1,11 @@
 #include <iostream>
 #include <bitset>
 #include "ADC.h"    
-#include "WPI.h"            // wiringPi
+#include "WPI.h"                // wiringPi
 #include "sleep.h"  
-#include "config.h"         // configuration constans and flags
-#include "ADC_utilities.h"  // enum to string conversion
+#include "config.h"             // configuration constans and flags
+#include "ADC_utilities.h"      // enum to string conversion
+#include "ADC_port_manager.h"   // PortManager class
 
 using namespace std;
 
@@ -35,6 +36,11 @@ ADS1263::ADS1263(int datarate) {
     digitalWrite(CS_PIN, HIGH);
     digitalWrite(DRDY_PIN, HIGH);
 
+    // set up channels {POSITIVE_PORT, NEGATIVE_PORT, TARE_FACTOR, CAL_FACTOR}
+    //                                                                  (TODO: Load channels from .json)
+    // COMM on NEGATIVE_PORT means the channel is single ended
+    
+
     // set default flags                                                (TODO: load from .json)
     set_debug(DEBUG);
 
@@ -59,6 +65,8 @@ ADS1263::ADS1263(int datarate) {
     gain = get_gain();
     drate = get_data_rate();
     vref = VREF;
+    current_channel_positive = get_channel_positive();
+    current_channel_negative = get_channel_negative();
 }
 
 ADS1263::~ADS1263() {
@@ -69,15 +77,32 @@ ADS1263::~ADS1263() {
 // ############################################ USAGE ##############################################
 // #################################################################################################
 
-double ADS1263::read(unsigned char channel) {
-    change_mode(PULSE);
+double ADS1263::read(PortManager port) {
+    /*
+    DESCRIPTION:
 
+    ARGUMENTS:
+
+    RETURN:
+
+    */
+
+    // decipher arguments
+    CHANNEL channel_positive = port.get_positive_channel();
+    CHANNEL channel_negative = port.get_negative_channel();
+
+    set_channel_positive(channel_positive);
+    set_channel_negative(channel_negative);
+
+    change_mode(PULSE);                                         // TODO: should I change it to pulse mode?
+    
+    // Instruct ADC to start gathering data
     digitalWrite(CS_PIN,  LOW);
     SPI_write(CMD_START1);
     digitalWrite(CS_PIN, HIGH);
     
+    // wait for data ready
     WPIWfiStatus wfistatus = waitForInterrupt2(DRDY_PIN, INT_EDGE_FALLING, 50, 0);      // 50 ms timeout
-    //sleep(1);
     
     if(debug) {
         cout << "Data ready for readout!" << endl;
@@ -87,16 +112,16 @@ double ADS1263::read(unsigned char channel) {
         // cout << "timeStamp: " << wfistatus.timeStamp_us << " us" << endl;
     }
 
-    
+    // read ADC data
     unsigned char buf[4];
     digitalWrite(CS_PIN,  LOW);
-    SPI_read();
+    SPI_read();                 // status byte
     buf[0] = SPI_read();        // MSB
     buf[1] = SPI_read();
     buf[2] = SPI_read();
     buf[3] = SPI_read();        // LSB
-    SPI_read(); 
-    SPI_write(CMD_STOP1);
+    SPI_read();                 // Checksum byte
+    SPI_write(CMD_STOP1);       // Stop data gathering (should not matter in PULSE mode I guess)
     digitalWrite(CS_PIN, HIGH);
 
     // combine 8 bytes into single two's complement string of bits
@@ -359,3 +384,78 @@ unsigned char ADS1263::SPI_read() {
 }
 
 
+unsigned char ADS1263::set_channel_positive(CHANNEL channel) {
+    /*
+    DESCRIPTION:
+
+    ARGUMENT:
+
+    RETURN:
+    
+    */
+
+    unsigned char buf = read_register(REG_INPMUX);                  // get current register value
+    buf = (buf & 0b00001111) | ((unsigned char)channel << 4);      // update register value
+
+    if(write_register(REG_INPMUX, buf)) {                           // Push to the register
+        current_channel_positive = channel;
+        return 1;                                                   // The register writing has been successfull
+    } else {                                                        // The writing to the register has failed
+        unsigned char reg = read_register(REG_INPMUX);              // Actual register value
+        cout << "WARNING: set_channel_positive(): The positive channel has been set incorrectly" << endl;
+        cout << "WARNING: Current REG_INPMUX: " << bitset<8>(reg) << " [4 bits positive channel][4 bits negative channel]" << endl;
+        cout << "WARNING: Expected REG_INPMUX: " << bitset<8>(buf) << " [4 bits positive channel][4 bits negative channel]" << endl;
+        return 0;
+    }
+
+}
+
+unsigned char ADS1263::set_channel_negative(CHANNEL channel) {
+    /*
+    DESCRIPTION:
+
+    ARGUMENT:
+
+    RETURN:
+    
+    */
+
+    unsigned char buf = read_register(REG_INPMUX);          // get current register value
+    buf = (buf & 0b11110000) | (unsigned char)channel;      // update register value
+
+    if(write_register(REG_INPMUX, buf)) {                   // Push to the register
+        current_channel_negative = channel;
+        return 1;                                           // The register writing has been successfull
+    } else {                                                // The writing to the register has failed
+        unsigned char reg = read_register(REG_INPMUX);      // Actual register value
+        cout << "WARNING: set_channel_negative(): The negative channel has been set incorrectly" << endl;
+        cout << "WARNING: Current REG_INPMUX: " << bitset<8>(reg) << " [4 bits positive channel][4 bits negative channel]" << endl;
+        cout << "WARNING: Expected REG_INPMUX: " << bitset<8>(buf) << " [4 bits positive channel][4 bits negative channel]" << endl;
+        return 0;
+    }
+
+}
+
+CHANNEL ADS1263::get_channel_positive() {
+    /*
+    DESCRIPTION:
+        fetch currently set positive channel from ADC and save it to the internal attribute
+    RETURN:
+        currently set positive channel
+    */
+    unsigned char buf = read_register(REG_INPMUX);
+    current_channel_positive = (CHANNEL)(buf>>4);        // set attribute for future use without straining SPI
+    return current_channel_positive;
+}
+
+CHANNEL ADS1263::get_channel_negative() {
+    /*
+    DESCRIPTION:
+        fetch currently set negative channel from ADC and save it to the internal attribute
+    RETURN:
+        currently set negative channel
+    */
+    unsigned char buf = read_register(REG_INPMUX);
+    current_channel_negative = (CHANNEL)(buf & 0b00001111);        // set attribute for future use without straining SPI
+    return current_channel_negative;
+}

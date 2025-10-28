@@ -5,21 +5,22 @@
 
 using namespace std;
 
+
+
 int main() {
     
     cout << "Hello, World!" << endl;
 
     ADS1263 ADC(500*1000);
 
-    ADC.set_gain(GAIN_4);
-    ADC.set_data_rate(SPS_38400);
+    ADC.set_gain(GAIN_1);
+    ADC.set_data_rate(SPS_400);
 
-    cout << endl;
-    cout << "ADC.READ()" << endl;
-    ADC.read(0);
+    PortManager CH0(A0, COMM, 0, 1);
 
-    for(int i=0; i<=1000; i++) {
-        cout << i << ": " << ADC.read(0) << endl;
+
+    for(int i=0; i<=5000; i++) {
+        cout << i << ": " << ADC.read(CH0) << endl;
         sleep(10);
     }
     

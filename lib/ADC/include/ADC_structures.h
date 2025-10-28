@@ -159,4 +159,5 @@ typedef enum {
     V_DIGITAL = 0b1101, // 13
     TDAC = 0b1110,      // 14
     FLOAT = 0b1111      // 15
-} PORT;
+} CHANNEL;
+
