@@ -131,7 +131,7 @@ double ADS1263::read(PortManager port) {
                             (static_cast<int32_t>(buf[3]));
 
     
-    double result = static_cast<double>(combined_buf) * static_cast<double>(static_cast<int32_t>(vref/ADC_GAIN_toint(gain)) / 0x7FFFFF);
+    double result = static_cast<double>(combined_buf / (0x7FFFFF-1)) * static_cast<double>(vref/ADC_GAIN_toint(gain));
 
     // for positive numbers: input_code/(2^31-1) * VREF/GAIN
     // for negative numbers: input_code/(2^31) * VREF/GAIN
