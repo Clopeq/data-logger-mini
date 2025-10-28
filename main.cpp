@@ -12,7 +12,6 @@ void clearConsole() {
 
 int main() {
     
-    cout << "Hello, World!" << endl;
 
     ADS1263 ADC(500*1000);
 
@@ -29,10 +28,6 @@ int main() {
     
     string command;
 
-    cout << "CMD: " << endl;
-    cin >> command;
-    cout << command << endl;
-
     double new_measurement;
 
     while(true) {
@@ -43,7 +38,7 @@ int main() {
 
         if(command == "EXIT") {
             cout << "EXIT!" << endl;
-            break;
+            return 0;
         }
 
         if(command == "") {
