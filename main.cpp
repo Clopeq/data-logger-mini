@@ -6,7 +6,9 @@
 
 using namespace std;
 
-
+void clearConsole() {
+    cout << "\033[2J\033[1;1H"; // ANSI escape codes
+}
 
 int main() {
     
@@ -30,6 +32,43 @@ int main() {
     cout << "CMD: " << endl;
     cin >> command;
     cout << command << endl;
+
+    double new_measurement;
+
+    while(true) {
+        clearConsole();
+        cout << "CMD: ";
+        cin >> command;
+        clearConsole();
+
+        if(command == "EXIT") {
+            cout << "EXIT!" << endl;
+            break;
+        }
+
+        if(command == "") {
+            for(int i=0; i<=10; i++) {
+                cout << i << ": " << ADC.read(CH0) << endl;
+                sleep(10);
+            }
+        }
+
+        if(command == "CAL") {
+            cout << "new measurement: ";
+            cin >> new_measurement;
+            CH0.calibrate(ADC.read(CH0), new_measurement);
+
+        }
+
+        
+        if(command == "TARE") {
+            cout << "new measurement: ";
+            cin >> new_measurement;
+            CH0.tare(ADC.read(CH0), new_measurement);
+
+        }
+
+    }
 
 
     return 0;
