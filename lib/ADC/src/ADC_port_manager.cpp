@@ -3,7 +3,7 @@
 
 using namespace std;
 
-PortManager::PortManager(CHANNEL ch_positive, CHANNEL ch_negative, double tare = 0, double calibrate = 1) {
+PortManager::PortManager(CHANNEL ch_positive, CHANNEL ch_negative, double tare, double calibrate) {
     positive = ch_positive;
     negative = ch_negative;
     tare_factor = tare;
@@ -14,7 +14,7 @@ PortManager::~PortManager() {
     int i=0; // do nothing
 }
 
-unsigned char PortManager::set_channel(CHANNEL ch_positive, CHANNEL ch_negative = COMM) {
+unsigned char PortManager::set_channel(CHANNEL ch_positive, CHANNEL ch_negative) {
     /*
     DESCRIPTION:
         set the positive and negative channels for the port tied to this object. Does not affect ADC's registers
@@ -30,7 +30,7 @@ unsigned char PortManager::set_channel(CHANNEL ch_positive, CHANNEL ch_negative 
     return 0;
 }
 
-double PortManager::tare(double old_measurement, double new_measurement = 0) {
+double PortManager::tare(double old_measurement, double new_measurement) {
     /*
     DESCRIPTION:
         Linear function used: y = a(x-b), where:
@@ -60,7 +60,7 @@ double PortManager::tare(double old_measurement, double new_measurement = 0) {
     return tare_factor;
 }
 
-double PortManager::calibrate(double old_measurement, double new_measurement = 1) {
+double PortManager::calibrate(double old_measurement, double new_measurement) {
     /*
     DESCRIPTION:
         Linear function used: y = a(x-b), where:
