@@ -30,8 +30,8 @@ int main() {
 
     double new_measurement;
 
+    clearConsole();
     while(true) {
-        clearConsole();
         cout << "CMD: ";
         cin >> command;
         clearConsole();
@@ -39,28 +39,23 @@ int main() {
         if(command == "EXIT") {
             cout << "EXIT!" << endl;
             return 0;
-        }
-
-        if(command == " ") {
+        } else if(command == "M") {
             for(int i=0; i<=10; i++) {
                 cout << i << ": " << ADC.read(CH0) << endl;
                 sleep(10);
             }
-        }
-
-        if(command == "CAL") {
+        } else if(command == "CAL") {
             cout << "new measurement: ";
             cin >> new_measurement;
             CH0.calibrate(ADC.read(CH0), new_measurement);
 
-        }
-
-        
-        if(command == "TARE") {
+        } else if(command == "TARE") {
             cout << "new measurement: ";
             cin >> new_measurement;
             CH0.tare(ADC.read(CH0), new_measurement);
 
+        } else {
+            cout << "Unknown command" << endl;
         }
 
     }
