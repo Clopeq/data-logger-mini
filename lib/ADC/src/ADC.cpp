@@ -133,6 +133,8 @@ double ADS1263::read(PortManager port) {
     
     double result = static_cast<double>(combined_buf / (2147483647.0)) * static_cast<double>(vref/ADC_GAIN_toint(gain));
 
+    result = port.get_cal_factor() * (result - port.get_tare_factor());
+
     // for positive numbers: input_code/(2^31-1) * VREF/GAIN
     // for negative numbers: input_code/(2^31) * VREF/GAIN
     // Above approach should effectivly apply the scaling factor to the raw output.

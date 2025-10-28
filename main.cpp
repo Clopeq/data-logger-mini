@@ -45,14 +45,23 @@ int main() {
                 sleep(10);
             }
         } else if(command == "CAL") {
+            cout << "Current measurement: " << ADC.read(CH0) << endl;
+            cout << "Current cal_factor: " << CH0.get_cal_factor() << endl;
             cout << "new measurement: ";
             cin >> new_measurement;
             CH0.calibrate(ADC.read(CH0), new_measurement);
+            cout << "new measurement: " << ADC.read(CH0) << endl;
+            cout << "new cal_factor: " << CH0.get_cal_factor() << endl;
+
 
         } else if(command == "TARE") {
+            cout << "Current measurement: " << ADC.read(CH0) << endl;
+            cout << "Current tare_factor: " << CH0.get_tare_factor() << endl;
             cout << "new measurement: ";
             cin >> new_measurement;
             CH0.tare(ADC.read(CH0), new_measurement);
+            cout << "new measurement: " << ADC.read(CH0) << endl;
+            cout << "new tare_factor: " << CH0.get_tare_factor() << endl;
 
         } else {
             cout << "Unknown command" << endl;
