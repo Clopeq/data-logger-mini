@@ -41,7 +41,7 @@ int main() {
             return 0;
         }
 
-        if(command == "") {
+        if(command == " ") {
             for(int i=0; i<=10; i++) {
                 cout << i << ": " << ADC.read(CH0) << endl;
                 sleep(10);
