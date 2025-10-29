@@ -2,6 +2,7 @@
 
 #include <string>
 
+using namespace std;
 
 // GLOBAL Flags
 #define DEBUG false          // If true additional messages will be printed to the command line
