@@ -1,0 +1,11 @@
+{
+  "answer": {
+    "everything": 42
+  },
+  "happy": true,
+  "object": {
+    "currency": "USD",
+    "value": 45
+  },
+  "pi": 3.1415
+}
