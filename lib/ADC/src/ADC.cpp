@@ -387,7 +387,7 @@ unsigned char ADS1263::load_config() {
         0 - failure
     */
 
-
+    return 0;
 }
 
 
