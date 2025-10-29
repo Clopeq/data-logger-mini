@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Compiling project..."
+echo "Compiling project.."
 sudo git pull
 mkdir build
 cd build
