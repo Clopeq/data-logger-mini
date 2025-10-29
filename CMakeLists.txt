@@ -25,8 +25,6 @@ add_subdirectory(lib)
 # Gather main sources from /src folder
 file(GLOB SRC_FILES src/*.cpp) # GLOB - recursivly, SRC_FILES - a name, can be whatever, src/*.cpp - all .cpp files from /src folder
 
-add_library(root_sources ${SRC_FILES})
-
 # Create the main executable.
 add_executable(${PROJECT_NAME} main.cpp ${SRC_FILES})
 
@@ -34,4 +32,4 @@ add_executable(${PROJECT_NAME} main.cpp ${SRC_FILES})
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
 # Link the libraries
-target_link_libraries(${PROJECT_NAME} PRIVATE ADC WPI utilities json root_sources)# json sensors) # list all of the libraries
+target_link_libraries(${PROJECT_NAME} PRIVATE ADC WPI utilities json)# json sensors) # list all of the libraries
