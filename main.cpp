@@ -3,7 +3,7 @@
 #include <string>
 #include <fstream>
 #include <filesystem>
-#include "config.h"
+#include "include/config.h"
 #include "json.h"
 //#include "ADC.h"
 //#include "sleep.h"
