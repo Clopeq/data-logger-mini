@@ -5,4 +5,4 @@ set(LIB_NAME json)
 add_library(${LIB_NAME} INTERFACE)
 
 # Add include directory for this library
-target_include_directories(${LIB_NAME} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(${LIB_NAME} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/include)
