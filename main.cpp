@@ -71,7 +71,7 @@ void clearConsole() {
 int main() {
 
 
-    cout << filesystem::current_path().string() + "/config" << endl;
+    cout << get_config_dir() << endl;
 
     // cout << "Hello, World!" << endl;
 
