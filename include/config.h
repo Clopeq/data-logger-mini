@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 
 // GLOBAL Flags
 #define DEBUG false          // If true additional messages will be printed to the command line
@@ -21,3 +23,4 @@
 #define SPI_RATE 500000     // clock speed for SPI communication, use < 1MHz for register read/write, otherwise up to 8 MHz is allowable
 
 
+string get_config_dir();
