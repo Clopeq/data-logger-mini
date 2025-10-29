@@ -4,6 +4,6 @@
 
 using namespace std;
 
-string get_config_dit() {
+string get_config_dir() {
     return filesystem::current_path().string() + "/config";
 }

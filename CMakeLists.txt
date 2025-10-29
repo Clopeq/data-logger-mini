@@ -22,8 +22,12 @@ project(main)
 # Add CMakeLists.txt from /lib subdirectory
 add_subdirectory(lib)
 
+#add_library(root)
 # Gather main sources from /src folder
 file(GLOB SRC_FILES src/*.cpp) # GLOB - recursivly, SRC_FILES - a name, can be whatever, src/*.cpp - all .cpp files from /src folder
+
+# target_sources(root PUBLIC ${SRC_FILES})
+# target_include_directories(root PUBLIC ${CMAKE_SOURCE_DIR}/include)
 
 # Create the main executable.
 add_executable(${PROJECT_NAME} main.cpp ${SRC_FILES})
