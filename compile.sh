@@ -1,5 +1,6 @@
 #!/bin/bash
 echo "Compiling project..."
+sudo git pull
 mkdir build
 cd build
 make clean
