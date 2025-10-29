@@ -6,6 +6,7 @@
 #include "config.h"             // configuration constans and flags
 #include "ADC_utilities.h"      // enum to string conversion
 #include "ADC_port_manager.h"   // PortManager class
+#include "json.h"               // configuration files
 
 using namespace std;
 
@@ -376,6 +377,18 @@ unsigned char ADS1263::write_register(ADC_REG reg, unsigned char val) {
 // #########################################################################################
 // #################################### PRIVATE METHODS ####################################
 // #########################################################################################
+
+unsigned char ADS1263::load_config() {
+    /*
+    DESCRIPTIONL:
+        Load configurtion file, setup ports, voltage reference, etc.
+    RETURN:
+        1 - success
+        0 - failure
+    */
+
+
+}
 
 
 unsigned char ADS1263::SPI_write(unsigned char value) {

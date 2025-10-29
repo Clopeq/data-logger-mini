@@ -21,7 +21,7 @@ public:
     double read_all(unsigned char channel_list[]);
     double read_all_continous(unsigned char channel_list[]);
 
-    // configuration
+    // configuration (user exposed registry manipulation)
     void change_mode(ADC_RUNMODE mode);
     unsigned char set_gain(ADC_GAIN gain);
     ADC_GAIN get_gain();
@@ -29,20 +29,28 @@ public:
     ADC_DRATE get_data_rate();
 
     // utility
-    unsigned char read_register(ADC_REG reg);
-    unsigned char write_register(ADC_REG reg, unsigned char value);
-    void set_debug(bool state);
-    void reset();
-    void close();
+    unsigned char read_register(ADC_REG reg);                       // public for in field hacking
+    unsigned char write_register(ADC_REG reg, unsigned char value); // public for in field hacking
+    void set_debug(bool state);                                     // public for in field hacking
+    void reset();                                                   // public for in field hacking
+    void reload();                                                  // public for in field hacking (reload config from file)
 
 private:
+    // utilities
+    unsigned char load_config();
+    void close();    
+    
+    // SPI communication
     unsigned char SPI_write(unsigned char value);
     unsigned char SPI_read();
+
+    // port managment
     unsigned char set_channel_positive(CHANNEL channel);
     unsigned char set_channel_negative(CHANNEL channel);
     CHANNEL get_channel_positive();
     CHANNEL get_channel_negative();
 
+    // attributes
     long double a;
     long double b;
     int spi_rate;

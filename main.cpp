@@ -5,8 +5,8 @@
 #include <filesystem>
 #include "config.h"
 #include "json.h"
-//#include "ADC.h"
-//#include "sleep.h"
+#include "ADC.h"
+#include "sleep.h"
 
 using namespace std;
 using json = nlohmann::json;
